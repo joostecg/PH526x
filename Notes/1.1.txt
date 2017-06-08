@@ -1,0 +1,459 @@
+1.1.1: Python Basics
+Python is an interpreted language.
+That means you can run your Python programs without the need to first link
+or compile them.
+Python has two different modes.
+These modes are called the interactive mode and the standard mode.
+The interactive mode is meant for experimenting your code one
+line or one expression at a time.
+In contrast, the standard mode is ideal for running your programs from start
+to finish.
+Myself, I often alternate between these two Python modes.
+If the task at hand is relatively easy, I
+tend to write the code directly in the standard mode.
+However, if the code is more challenging to me,
+I tend to spend more time in the interactive mode.
+That way I can perfect every line before I import that to the standard mode.
+Python programs tend to be much shorter than equivalent programs in C or C++
+or Java.
+This is because Python is a high-level language.
+It has data types that allow you to express complex operations
+in a very concise manner.
+Finally, you should know how Python gets its name.
+Python is not named after the snake, as you might have imagined.
+In fact, Python is named after the inimitable BBC show
+Monty Python's Flying Circus, a show that I highly recommend.
+In addition to using just core Python, we'll
+be using several Python packages to perform scientific computations.
+But instead of installing more than 200 packages manually one at a time,
+we will be using a Python distribution.
+A distribution consists of the core Python
+package and several hundred modules, all working seamlessly together.
+All of this is available through a single download.
+There are currently several Python distributions available.
+The one we will be using in this course is called the Anaconda Python
+distribution.
+At the time of recording, this redistribution
+supports almost 300 packages and new packages are added almost daily.
+In addition, Anaconda also includes two very useful development environments,
+which are called Jupyter and Spyder.
+This course will be making extensive use of both of these environments.
+Questions often come up:
+Should I learn Python 2 or Python 3?
+And the truth of the matter is, some people like Python 2
+better, some people like Python 3 better.
+A useful place for learning more about the Python 2 versus Python 3 issue
+is python.org.
+That website provides an especially concise summary of the situation.
+According to the website, Python 2 is legacy,
+whereas Python 3 is the present and future of the language.
+Python 3 has, in fact, been around for already several years.
+Python 3.0 was released in 2008.
+So are there any downsides to Python 3?
+Well, there is really only one principal downside
+which is that Python 3 is not backwards compatible with Python 2.
+What that means, if you write your code in Python 3, somebody running Python 2
+will not be able to run that code.
+Here is why we will be using Python 3 in this course.
+All new standard library improvements will only be available by default
+in Python 3.
+Python 3 is also easier for newcomers to learn,
+and several aspects of the core language are
+more consistent than those in Python 2.
+Python 3 also eliminates many of the quirks that can easily trip up
+beginning programmers learning Python.
+So this is a good time to be learning Python 3.
+Many of the core Python developers believe
+that Python 3 became the obvious choice to learn for new projects,
+starting in September 2015.
+The recommendation is that people learn Python 3
+unless they have a very good reason to be learning Python 2.
+So unless you have a very special reason to learn Python 2,
+I would like to invite you to learn Python 3 with me, my TAs,
+and the rest of the HarvardX team.
+
+1.1.2: Objects
+Python contains many data types as part of the core language.
+It's important to understand that all data in a Python program
+is represented by objects and by relationships between objects.
+Here is the idea -
+the value of some objects can change in the course of program execution.
+Objects whose value can change are said to be mutable objects,
+whereas objects whose value is unchangeable after they've been created
+are called immutable.
+Python also contains building functions that
+can be used by all Python programs.
+The Python library consists of all core elements, such as data types
+and built-in functions
+but the bulk of the Python library consists of modules.
+In order for you to be able to make use of modules in your own code,
+you first need to import those modules using the import statement.
+Each object in Python has three characteristics.
+These characteristics are called object type, object value,
+and object identity.
+Object type tells Python what kind of an object it's dealing with.
+A type could be a number, or a string, or a list, or something else.
+Object value is the data value is contained by the object.
+This could be a specific number, for example.
+Finally, you can think of object identity
+as an identity number for the object.
+Each distinct object in the computer's memory
+will have its own identity number.
+Most Python objects have either data or functions or both associated with them.
+These are known as attributes.
+The name of the attribute follows the name of the object.
+And these two are separated by a dot in between them.
+The two types of attributes are called either data attributes or methods.
+A data attribute is a value that is attached to a specific object.
+In contrast, a method is a function that is attached to an object.
+And typically a method performs some function
+or some operation on that object.
+Object type always determines the kind of operations that it supports.
+In other words, depending on the type of the object,
+different methods may be available to you as a programmer.
+Finally, an instance is one occurrence of an object.
+For example, you could have two strings.
+They may have different values stored in them,
+but they nevertheless support the same set of methods.
+To clarify the difference between a data attribute and a method,
+let's do some Python.
+Let's first import a library called NumPy, which I'm going to import as np
+and this is just to save me some typing.
+I'm going to define two arrays.
+Let's say my first array consists of numbers 1, 3, and 5.
+I'm going to call that x.
+And my second array is going to be called y
+and let's say it consists of numbers 1, 5, and 9.
+Now both of these objects are NumPy arrays.
+That means they both support the same methods
+and have the same attributes available.
+If I wanted to know the mean of the numbers in x,
+I would simply ask Python to return that.
+Here, I'm calling the mean method, which is connected to the object x.
+I can do the same exact thing for object y.
+They turn out to have different means in this case, but in both cases
+the mean method is available to me.
+Let's look at an example of a data attribute.
+If I type x.shape, Python is telling me that this array contains three numbers.
+I can similarly ask, how many elements do I have in y?
+And the answer is the same.
+There are three elements embedded in y.
+Notice in the first case, when I ask Python to compute a value,
+I have parentheses following the name of the attribute.
+That means mean is a function.
+In contrast, when I ask Python to return the shape of the array,
+I don't have parentheses following the word "shape".
+That means shape is a data attribute.
+
+1.1.3: Modules and Methods
+Let's talk a little bit about modules.
+Python modules are libraries of code and you
+can import Python modules using the import statements.
+Let's start with a simple case.
+We're going to import the math module by saying "import math".
+The module comes with several functions.
+We're just going to demonstrate a couple of them.
+For example, if I wanted to use the value of pi, I would type math.pi
+and Python would tell me the value of pi, 3.14, and so on.
+The math module also comes with several functions, or methods.
+Let's try out the square root function.
+To use that, I type math.sqrt and the input argument
+is the number that I want the square root to be taken of.
+So in this case, I've asked Python to return the value of square root of 10.
+Let's do something a little more sophisticated.
+What if I wanted to find out the value of sin pi over 2?
+Let's first extract the value of pi, which we know is math.pi.
+We can then take this number and divide that by 2.
+So this is pi over 2.
+To take the sin of this number, we say math.sin and use math.pi over 2
+as an input to the sin function.
+And as expected, Python tells us the sin of pi over 2 is exactly 1.
+Sometimes, we don't want to use the entire module.
+Perhaps we just want to choose one function from that module.
+Let's think about a situation where I just
+need to be able to have the value of pi available to me in my program.
+So I didn't need anything else from the math library, just the value of pi.
+To do that, I can do the following-- I can tell Python from math, import pi.
+In this case, Python has imported just the value of pi
+from that module and nothing else.
+Let's talk a little bit about namespaces.
+What is a namespace?
+Well namespace is a container of names shared
+by objects that typically go together.
+And its intention is to prevent naming conflicts.
+Perhaps the best way to understand namespace is through an example.
+So let's do the following.
+Let's import the math module first.
+We're then going to import the numpy module as np.
+Now, the math module has a square root method, sqrt,
+but numpy also has a square root method, sqrt.
+What is the difference between these two functions?
+Well, let's try an example.
+If I type math.sqrt, I can ask Python to calculate
+the value of the square root of 2.
+I can do the same exact thing using the square root
+function from the numpy module.
+So far, it appears that these two functions are identical,
+but actually these two functions are quite separate
+and they exist in different namespaces.
+It turns out that the numpy square root function
+can do things that the math square root function doesn't know how to do.
+Here's a simple example.
+What if I wanted to take the square root of not just one number,
+but several numbers, say, 2, 3, and 4?
+I can do this simultaneously for all of them.
+This is not possible using the math square root function.
+Let's then talk about the import statement.
+What exactly happens when you run the Python import statement?
+Three things happen.
+The first thing that happens is Python creates
+a new namespace for all the objects which are defined in the new module.
+So in abstract sense, this is our new namespace.
+That's the first step.
+The second step that Python does is it executes the code of the module
+and it runs it within this newly created namespace.
+The third thing that happens is Python creates
+a name-- let's say np for numpy-- and this name references this new namespace
+object.
+So when you call np.sqrt function, Python
+is using the sqrt function within the numpy namespace.
+Math has its own namespace with its own square root function.
+So when you type math.sqrt, Python is calling this sqrt function
+within the math namespace.
+What if somebody hands you a Python object
+and you don't know the type of that object?
+Let's see what you can do.
+Let's define a Python string.
+We're just going to define a name, and we're going to call that name Amy.
+If you wanted to know what is the type of this object,
+you can use the type function, and Python
+will tell you the name is a string.
+Now that you know that the object is a string,
+we can find out what other methods that are available to you.
+You can do this in two different ways.
+We can use to dir, dir function, to get a directory of the methods.
+So I can type dir name, and Python will give me
+a long list of methods that are available to string objects.
+An alternative way to do this is instead of using the actual name of the object,
+I can use the object type.
+In this case, I know that name was a string, so instead of typing name,
+I can just type str and Python will give me the same exact list of methods.
+So if I wanted to learn more about a specific method,
+say, the upper method of strings, what should I do?
+Well, the first option is the following.
+I can just ask Python for help by typing "help"
+and Python will give me a very brief description of the function.
+But notice the following-- when I am asking for help,
+I need to make sure that I don't actually run that method.
+So what's happening here?
+Name.upper is a function, or a method, that's bound to a name object.
+If I add parentheses to the end, I'm actually calling that method.
+I'm asking Python to do something.
+In that case, Python is turning the name "Amy," in this case,
+into all uppercase.
+So if I'm now asking for help, if I type "help" name.upper
+and I have the parentheses after upper, I'm effectively asking help on Amy.
+So in this case, Python tells me it doesn't have documentation available
+for Amy.
+So when I'm using the help function, I need
+to make sure that I don't actually run the method I'm
+interested in getting help for.
+The help function is very handy if all you need
+is a tiny bit of clarification on how a specific method works.
+But if you need more help, then your best bet
+is probably to go online and just Google the method in question.
+
+1.1.4: Numbers and Basic Calculations
+Numbers are one type of object in Python.
+And Python, in fact, provides three different numeric types.
+These are called integers, floating point numbers, and complex numbers.
+One of the interesting things about Python integers
+is that they have unlimited precision.
+That means your integer will never be too
+long to fit into Python's integer type.
+Another important aspect to realize about numbers
+is that you can freely mix different numeric types.
+All Python numbers support all the usual arithmetic operations.
+And let's try a few of them out right now.
+The basics, like addition and multiplication are, of course, easy.
+We can also raise a number to a power.
+And you'll see that if we increase the exponent a little bit,
+the result is going to be a very large number,
+but that's not going to be a problem.
+Again, Python has unlimited precision for integers.
+Let's try out division.
+Division is accomplished using the slash.
+So for example, if we say 6 divided by 7,
+Python gives us the floating point answer.
+Sometimes, however, we might want to do what's called
+floor division, or integer division.
+This is accomplished by using two slash signs.
+In this case, let's do something like 15 divided by 7, which in a floating point
+is 2.14.
+If we use integer division, Python is going to give us an answer of 2.
+So what happened here is the following:
+Python carries out the division as usual
+and that gives you the number 2.14.
+It then rounds that number to the closest integer,
+which is less than the actual floating point answer.
+So 2.14, a floating point number, gets rounded down
+to the closer, smaller integer, which is 2.
+The interactive mode in Python provides a very useful operation
+which is the underscore operator.
+And the value of the underscore operator is always the last object
+that Python has returned to you.
+So let's see what that means.
+Let's do a simple division-- 15 divided by 2.3, say.
+Python tells us that it's 6.521 and so on.
+Now, if I hit underscore, Python is returning
+the value of the latest operation.
+Say I wanted to multiply this number with 2.3, which
+would give me back the number of 15.
+So I can do that in the following way.
+I just take the underscore,
+I multiply that by 2.3, and the answer is 15.
+This is especially handy in the interactive mode
+if you'd like to change a few calculations.
+So let's try one example.
+Let's first start with 10 times 2.
+That's 20.
+Let's take that number,
+let's add 5 to it,
+and let's then take that number 25 raise that to the second power.
+In this case, the answer is 625.
+Very commonly we need to go beyond the built-in functions and operations
+that Python provides.
+And one way to do this for numbers is to use
+the math module, which contains some basic mathematical operations,
+like the factorial.
+Let's just quickly remind ourselves, what is the factorial operation.
+So the factorial of n,
+indicated by exclamation mark, is n times n minus 1
+all the way times 2 times 1.
+And so for example, 3 factorial would be equal to 3 times 2 times 1, which is 6.
+Now, the question is, how could we implement this simple calculation
+in Python?
+Let's start by importing the math module.
+So we type import math.
+And the function we're interested in is math.factorial.
+So the argument in this case would be 3, and Python
+tells us 3 factorial is equal to 6.
+
+1.1.5: Random Choice
+Often when we're using numbers, but also,
+occasionally, with other types of objects,
+we would like to do some type of randomness.
+For example, we might want to implement a simple random sampling process.
+To this end, we can use the random module.
+So the starting point is, again, to import that module, random.
+Let's think about a simple example where we
+have a set of numbers contained in a list,
+and we would like to pick one of those numbers uniformly at random.
+The function we need to use in this case is random.choice,
+and inside parentheses, we need a list.
+In this list, I'm going to just enter a few numbers-- 2, 44, 55, and 66.
+And then when I run the random choice, Python returns one of these numbers
+back to me.
+If I repeat the same line, I'm going to get a different answer,
+because, again, Python is just picking one of those objects at random.
+A crucial thing to understand about the random choice method
+is that Python doesn't care about the fundamental nature of the objects that
+are contained in that list.
+What that means, instead of using numbers,
+I could also be choosing one out of several strings.
+So let's see how that might work.
+I'm going to go back to my list.
+I'm just going to include three short strings here.
+Let's just do "aa," "bb," and "cc."
+I can ask Python to pick one of these uniformly at random.
+So Python doesn't care about the nature of these objects.
+Random works just the same way for any type of object.
+
+1.1.6: Expressions and Booleans
+Expression is a combination of objects and operators that computes a value.
+Many expressions involve what is known as the boolean data type.
+Objects of the boolean type have only two values.
+These are called True and False.
+In Python, you need to capitalize these words, True and False,
+for Python to understand them as boolean type.
+Let's just check very quickly.
+If we type True, Python tells us this is a boolean object.
+Or if we ask Python, what is the type of False, with F capitalized,
+Python tells us this is a boolean object.
+Note that if I don't capitalize false, Python
+doesn't know what this object is.
+It doesn't understand that.
+So you need to be sure to capitalize your boolean types.
+Operations involving logic, so-called boolean operations,
+take in one or more boolean object and then
+they return one boolean object back to you.
+There are only three boolean operations, which are "or", "and", and "not".
+So let's try these out.
+Let's start with "or". "Or" between x and y
+is going to be True if either x is True or y is True, or both are True.
+So for example, if we say True or False, then Python returns True.
+True or True would also be True.
+So the only time "or" would be False-- if both the first and second object
+surrounding "or" are False.
+"And" is only true if both objects are True.
+So if we type True and True, the answer is going to be True.
+However, if we turned the second True to False, "and" is going to be False.
+So in order for "and" to be True, both of the objects need to be True.
+Finally, we have the "not" operation, which
+simply negates the value of the object.
+So if we say not True, Python gives us False.
+And if we say not False, Python returns to us True.
+We often need to compare objects in our programs.
+There are a total of eight different comparison operations in Python.
+Although these are commonly used for numeric types,
+we can actually apply them to other types as well.
+For example, if you're comparing two sequences,
+the comparison is carried out element-wise.
+So you're comparing the first element of your first sequence
+to your first element in your second sequence, and so on.
+The result of a comparison like this is always
+a boolean type, either True or False.
+It's perhaps easiest to understand these comparisons through a simple example
+that involves numbers.
+So let's try out a couple of them.
+Let's say you are comparing two numbers.
+We might ask Python, is 2 less than 4?
+Python returns True to us.
+We can also ask, is 2 less than or equal to, say, 2?
+And in this case, the answer is again True.
+We can test for equality by using two equal signs.
+2 is equal to 2, so Python returns True to us.
+And finally we can ask, are two objects not equal to one another,
+by using the exclamation mark or exclamation point.
+In this case, the answer is False, because two is equal to 2.
+These two comparisons are used to test whether two objects are
+the one and the same.
+Notice that this is different than asking if the contents of two objects
+are the same.
+So let's see what this implies using a little bit of code.
+We could ask Python if the list that contains
+numbers 2 and 3 is the same as the list containing numbers 3 and 3.
+The answer is, of course, False in this case.
+If we modify the second list, now both lists have the numbers 2 and 3 in them.
+The answer is going to be True.
+The lists are identical in content.
+However, if we wanted to ask if the first list is
+the same object as the second list, we would use the "is" comparison.
+And Python tells us that this is False.
+If we'd like to know if the first list is not
+the same object as the second list, we can use the "is not" operation.
+And in this case, Python returns True.
+So we actually have two lists here.
+They happen to have the same contents, but we do have two objects.
+That's why this comparison returns False.
+How would we test equality of two numbers that are a floating point
+number and an integer?
+So we can see how testing if 2.0 is equal to 2.0 returns True.
+But what happens if we ask Python, is 2.0 equal to 2?
+In this case 2.0 is a floating point number, whereas 2 is an integer.
+What happens in this situation is the following:
+Python takes the second number, which is number 2, an integer-- it turns that
+into a floating point number.
+The floating point representation of the integer 2 is 2.0.
+So now we are comparing implicitly 2.0 to 2.0.
+Therefore the answer is going to be True.

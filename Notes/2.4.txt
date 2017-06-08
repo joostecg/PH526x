@@ -1,0 +1,818 @@
+2.4.1: Simulating Randomness
+Many processes in nature involve randomness in one form or another.
+Whether we investigate the motions of microscopic molecules
+or study the popularity of electoral candidates,
+we see randomness, or at least apparent randomness, almost everywhere.
+In addition to phenomena that are genuinely random,
+we often use randomness when modeling complicated systems
+to abstract away those aspects of the phenomenon for which we do not
+have useful simple models.
+In other words, we try to model those parts of a process
+that we can explain in relatively simple terms,
+and we assume, true or not, that the rest is noise.
+To put this differently, we model what we can,
+and whatever it happens to be left out, we attribute to randomness.
+These are just some of the reasons why it's
+important to understand how to simulate random numbers and random processes
+using Python.
+We have already seen the random module.
+We will be using that to simulate simple random processes,
+but we'll also take a look at some other tools the Python has
+to generate random numbers.
+Let's see how we can use the random choice function to carry out perhaps
+the simplest random process -  the flip of a single coin.
+I'm first going to import the random library.
+So I type import random.
+Then we'll use the random choice function.
+We first need parentheses.
+And in this case, we need some type of a sequence, here a list,
+to contain the elements of the sequence.
+I'm going to go with two strings, H for heads and T for tails.
+If I now run this code, Python will pick one of the two elements, head or tail,
+from the sequence.
+If I run this several times, occasionally I get a head.
+Occasionally I get a tail, as expected.
+Often it's more useful, however, to re-label the side of the coin
+with 0 to 1.
+So instead of using list of strings, as we did in the above example,
+we will be using a list of two numbers, two integers,
+as our argument of the random choice function.
+I'm going to take this previous example.
+I'm going to replace the two strings with the numbers 0 and 1.
+And everything works just the same as before.
+The only difference is that now the outcomes are either zeros or ones.
+How could we use this approach to simulate the role of a die?
+Since the outcome of a die is an integer between 1 and 6,
+we can use the same approach here.
+I'm going to look at my previous example, where
+we picked a number, either 0 or 1.
+Instead of having numbers 0 and 1, all I need to do is update the list.
+In this case, I have the numbers 1, 2, 3, 4, 5, 6,
+which are the six possible outcomes of a standard die.
+I can now roll this die simply by running this line several times.
+In this case, we're choosing one number out of six,
+so this is how we can simulate a die.
+We could also implement this using a range object.
+And in that case, we just have to be careful when specifying the start
+and stop values.
+So instead of a list here, we insert a range.
+The first value has to be 1, and the stopping value is going to be 7.
+Remember that many Python functions, like range,
+stop before they hit the stop value.
+In this case, we specified the range object
+that will include the numbers from 1 to 6.
+Let's try running this example now a few times,
+and we'll see that it works just the same way as our list example above.
+When you explore the documentation for random choice,
+you'll find that you don't necessarily need to provide a list.
+Instead, any sequence object will do.
+And because range is a sequence object, you can provide that as an argument
+to the choice function.
+But it's worth taking a moment to think about what you're asking Python to do
+if you had used the following line.
+Taking the previous example, I'm just going
+to insert my range object inside a list object.
+I'm then going to run this line. See what's happening?
+We know that random choice expects a sequence, which is what you
+have provided, in this case, a list.
+But that list contains only one object.
+What is that object?
+It's a range object.
+So when you run this line, Python will always return a range 1,
+7 object to you because that's the only object or sequence the list contains.
+I mention this here because it could easily lead to a programming error,
+although you can always try running your code in the interactive mode
+to make sure it does what you would like it to do.
+Let's build on this idea to explore a somewhat harder example.
+Imagine a situation where you have three dice, one of them having six faces,
+one of them having eight faces, and one of them having ten faces.
+How could you simulate one outcome for a process, where one of these dice,
+chosen uniformly at random, is rolled just one time?
+Here's what I would do.
+First, I would think about choosing a die,
+and then second, I would think about how to roll the die I just chose.
+Let's first implement all three die and then the selection among them,
+and then we'll finally simulate the role of the chosen die.
+Let's first construct a list of range object.
+We have our first object, our second object, and our third object.
+The first one needs to be arranged 1,7 object, as we saw before.
+The second one is the range 1, 9 object.
+And the third one is range 1, 11 object.
+What we have now here is a list of three different range objects.
+If we'd like to pick one of these, we will use, again,
+the random choice function.
+So we need parentheses.
+Now let's try running this code.
+This time we got the range 1, 11 object.
+Now we get a different object and so on.
+So what this line of code does so far is it picks one to three range
+objects uniformly at random.
+But as before, we can pick one of the numbers that's
+contained within a range object.
+So we can embed the code we have inside another random choice function.
+In this case, we're first picking one range object.
+And then we're calling random choice on whichever
+range object we happened to pick.
+And in this case, we get an outcome that corresponds to the process
+that we wanted.
+Why does this example work?
+Remember, everything is an object in Python.
+Here, the innermost random choice first chooses
+one object from a sequence, here a list of range objects.
+The outermost random choice chooses one of the numbers from the given range
+object.
+
+2.4.2: Examples Involving Randomness
+Lets work with a few examples that involve randomness.
+This is also an opportunity for us to practice some simple data visualization
+techniques.
+Our first example is to roll the die 100 times
+and plot a histogram of the outcomes, meaning
+a histogram that shows how frequent the numbers from 1 to 6
+appeared in the 100 samples.
+Your observations will be integers between 1 and 6.
+We will simulate the die using the random module.
+And we will plot the histogram using the plt.hist function.
+So let's work with this example.
+The first thing we want to do is to import the random module,
+if you haven't done so already.
+I'm going to take this line of code here and just keep it here for future.
+The second thing we want to be able to do is throw a single die.
+We already know how to do this.
+We did that by using the random choice function using a list with the
+numbers 1, 2, 3, 4, 5, and 6.
+What this line does is it throws one die just one time.
+I'll move that line up here also for future use.
+What I would like to be able to do is roll a die
+not just once, but 100 times.
+Let's first see how I could do that.
+Because we want to repeat the rolling of a single die 100 times,
+this seems to call for a for loop.
+In this case, we could use a loop variable-- let's say k.
+We'd like to repeat this action 100 times.
+And the action we'd like to do is to roll a die.
+So we just type random.choice
+and we have our die here.
+In this case, what we're doing is we're rolling a die 100 times.
+But we're not storing the results anywhere.
+Let me move this code up here for future use.
+It appears that we need some variable that will contain the results,
+will hold the results, from each of the 100 die rolls.
+I'm going to call that rolls.
+And I'm going to build that up as an empty list.
+Every time I roll a die, I'd like to be able to append the new roll to my rolls
+list.
+So I type roll.append.
+What gets appended is the outcome of a new die roll.
+Let's try running this code now.
+In this case, the code runs.
+If we look at the length of rolls, we will
+see that we have 100 items, 100 objects, in there.
+We can also look at the actual numbers.
+And it seems to be working.
+The final piece that's missing from our example
+is the drawing of the histogram.
+We'll do that using plt.hist.
+Our variable is called rolls
+and I'd like to be able to specify the locations of the bins.
+Remember, that's something we can do with the keyword argument bins.
+I'm again going to be using NumPy linspace for this.
+The starting point is going to be 0.5.
+The ending point is going to be 6.5.
+And because I would like to have six bins,
+I need seven evenly spaced points.
+Let's try running the histogram line.
+This completes our histogram example.
+Here we would have intuitively expected a relatively flat histogram.
+But what's a more rigorous justification for this result?
+The law of large numbers, which is a theorem of probability,
+tells us that we should expect more or less the same number of 1s and 2s
+all the way to the 6s because they each have the same probability.
+And we've repeated the experiment-- the role of a
+die-- a large number of times.
+Well, actually 100 is not such a large number.
+So we can see what happens if we increase that number.
+Let's try rerunning our example using 10,000 repetitions.
+In this case I will go back to my code as before.
+I'm going to add a semi-colon to suppress the printing of the output
+object the histogram gives me.
+And then I will increase the number of data points to 10,000.
+I'm going to run or rerun the code
+and in this case, it appears that we get a histogram that's more flat.
+Let's now do this 1 million times.
+So we add two more zeros here.
+We rerun the code.
+This takes a bit longer.
+And you can see that the histogram is almost completely flat.
+Just to recap, we learned how to simulate a die, how to throw a die
+any number of times, how to visualize the output as a histogram,
+and by evoking the law of large numbers, we
+have an understanding of what should happen, which in this case
+was confirmed by our simulation.
+Considering now rolling not one die, but 10 independent dies
+denoted with x1 to x10.
+We're going to define a new random variable called y, which
+is the sum of all of the 10x variables.
+In other words, our new random variable y is going to be equal to x1 plus x2
+plus all the way up to x10.
+We'd like to understand the distribution of the random variable y
+by simulating its values a large number of times,
+and then plotting a histogram.
+The histogram will give us a reasonably good sense about the distribution of y.
+And the larger number of samples of y we use,
+the smoother the histogram becomes.
+Before proceeding, let's try to anticipate
+what the histogram might look like.
+This is generally a very useful thing to do.
+In other words, before you start writing the code,
+it's useful to think about what you would expect the result to be.
+First, since each x variable is at least 1, and we're summing 10 of them
+together, the least value y can assume is 10.
+By similar logic, the greatest value of y is 60.
+Let's now think about these two extremes-- say, the number 60.
+The only way that can occur if all 10 dice give a 6, which is very unlikely.
+But if we think about some intermediate value such as number 30,
+there are many combinations of die rolls that could give us that value.
+Because rolling 10 6s is just as likely or unlikely as rolling 10 1s,
+or 10 of anything, we would expect the histogram to peak at the center.
+And we'd also expect it to be very thin towards the ends
+as we get closer to either 10 or 60.
+Let's now simulate this process to see what happens.
+We already know how to roll one die.
+So the first task would seem to be how do we roll 10 dice.
+Let's start with the rolling of just one die.
+We know that we can do that by doing a random choice from 1 to 6.
+I'm going to call this x, because that was the notation that we used before.
+Our y variable is the sum of several x variables.
+So one way to proceed is to construct a loop in which we
+draw a new value of x 10 times
+and we keep building up our variable y.
+This would seem to call for a for loop.
+I'm going to be using k as my loop variable.
+We'll just type for k in range 10.
+We want to repeat this 10 times.
+We want to be careful about indenting our code,
+right?
+And then we also need a variable y.
+I'm going to define it before the loop.
+Initially the value of y is going to be 0.
+So what happens is the following:
+First, I set y to be equal to 0,
+I then enter the loop,
+and I then draw a new value for x.
+The final step that's missing is to update the value of y.
+So the new value of y is going to be equal to the old value plus
+whatever the value of x happens to be.
+Let's then see how we can roll this die multiple times
+and keep track of those rolls.
+Let's draw all y variables in a list called ys.
+Let's first create our list ys.
+That's an empty list.
+The code we have underneath here so far gives us just one realization
+of the random variable y.
+What we'd like to be able to do is have 100 such realizations.
+This suggests that we need to run this code 100 times
+which calls for a for loop.
+I'm going to build another for loop and nest
+my existing for loop inside the new for loop.
+The new dummy variable is going to be called rep.
+We're going to be doing this operation 100 times.
+In this case, I need to indent the code because I want first
+to run the outer loop 100 time,
+and for each time, I want to run the inner loop 10 times.
+A key point to realize is at what point of the code
+should I append the new value of y to ys.
+For example, if I type ys.append here, the following is going to happen:
+The new value of y is going to be appended
+to ys every time the inner loop runs.
+This is not correct.
+We therefore need to de-indent this line.
+Now we only append y once we've rolled the die 10 times.
+Let's now try running this code.
+I'm going to make one alteration here.
+It's usually a good idea to start small.
+So instead of doing this 100 times, let me just first do it 5 times.
+The code runs, which is a good sign.
+I can look at the length of my ys,
+and I have five numbers in there.
+If I print out the values, the numbers seem reasonable.
+I can now go back to my code.
+Instead of doing this five times, I'm going to do this 100 times.
+And I'll rerun the code.
+Now I will have a new set of y variables stored in ys.
+To learn more about those values I can ask -
+what is the minimum value that I have,
+or what is the maximum value that I have?
+In this case, both the minimum value and the maximum value
+is within expected bounds.
+To complete the example, we need to plot the histogram.
+Type plt.hist and ys.
+And we already have y values stored
+so we can just try running plt.hist.
+Let's now try rerunning this code.
+But instead of doing it 100 times, let's do it 10,000 times.
+I will rerun all of the code
+and this is the output I get.
+Let's run this one more time.
+Again, I'm going to add the semi-colon at the end of plt.hist,
+which suppresses the output.
+Just a couple of arrays that plt returns to me.
+And I'm then going to add two 0s to my range, which
+means that I will be repeating this process 1 million times.
+Let me run this.
+This will take a couple of seconds.
+And in this case, what we see is a beautiful histogram.
+You can see that the shape of the histogram
+looks a bit like what we anticipated.
+And you can get a better sense of the shape by varying the number of pins
+that you're using to plot the histogram.
+But to understand what's happening here, we
+can again get some insights from probability theory.
+The so-called central limit theorem, or CLT,
+states that the sum of a large number of random variables
+regardless of their distribution will approximately
+follow a normal distribution.
+There are some additional considerations that we will not get into
+but the main point is the following:
+You can sum together many random variables whose distribution
+is nothing like a normal distribution like die rolls, or even coin flips.
+And yet, the distribution of the sum will get closer and closer
+to a normal distribution as the number of random variables
+that are added together increases.
+The central limit theorem not only helps us understand our simulation results,
+but it also explains why the normal distribution, sometimes called
+a Gaussian distribution, occurs so often.
+For example, the height of a person probably
+depends on a large number of factors that
+are related to things like genetics, nutrition, environment, and so on.
+If we think of height as being a random variable that itself consists
+of a large number of other random variables that are added together,
+we would expect the height of a person in a population
+to follow the normal distribution.
+That is, in fact, what we know to be the case from empirical data.
+
+2.4.3: Using the NumPy Random Module
+NumPy makes it possible to generate all kinds of random variables.
+We'll explore just a couple of them to get you
+familiar with the NumPy random module.
+The reason for using NumPy to deal with random variables
+is that first, it has a broad range of different kinds of random variables.
+And second, it's also very fast.
+Let's start with generating numbers from the standard uniform distribution,
+which is a the completely flat distribution between 0
+and 1 such that any floating point number between these two endpoints
+is equally likely.
+We will first important NumPy as np as usual.
+To generate just one realization from this distribution,
+we'll type np dot random dot random.
+And this enables us to generate one realization
+from the 0 1 uniform distribution.
+We can use the same function to generate multiple realizations
+or an array of random numbers from the same distribution.
+If I wanted to generate a 1d array of numbers,
+I will simply insert the size of that array, say 5 in this case.
+And that would generate five random numbers drawn
+from the 0 1 uniform distribution.
+It's also possible to use the same function to generate
+a 2d array of random numbers.
+In this case, inside the parentheses we need to insert as a tuple
+the dimensions of that array.
+The first argument is the number of rows,
+and the second argument is the number of columns.
+In this case, we have generated a table --
+a 2d table of random numbers  with five rows and three columns.
+Let's then look at the normal distribution.
+It requires the mean and the standard deviation as its input parameters.
+In this case, I'd like to set the mean to be equal to 0,
+and standard deviation equal to 1.
+This gives us the so-called standard normal distribution.
+Just to be clear, there are an endless number of different distributions
+depending on the parameter values.
+But only the one with mean equal to 0 and a standard deviation
+equal 1 one has its own name-- the standard normal distribution.
+To generate random numbers from the standard normal distribution,
+or from the normal distribution in general,
+we will be using the np dot random dot normal function.
+The first argument is the mean of the distribution, in this case 0.
+And the second argument is the standard deviation, which is equal to 1.
+Using this syntax enables us to draw one realization, one number,
+from the standard normal distribution.
+If we'd like to generate instead a 1d array of numbers
+from the same distribution, we can specify the length of the 1d array
+as the third argument.
+In this case, if I would like to generate an array of five numbers,
+I will simply add a third argument, which is number 5 in this case.
+Finally, we can use the same function to generate 2d, or even
+3d arrays of random numbers.
+In that case, we need to insert another pair of parentheses
+because the dimensions of the array will be added as a tuple.
+If I'd like to generate a 2d array consisting
+of two rows and five columns -- those arguments go right inside the tuple,
+and I can still continue to use the same function.
+Let's revisit our example where we roll 10 die and added the result together.
+Remember, we defined a random variable y as the sum of random variables x1
+through x10, where each x variable is a standard
+die with 6 faces with the numbers from 1 to 6 on them.
+We can code this example using NumPy arrays.
+My overall strategy is to generate a table
+where each element corresponds to a roll of a die such
+that each element is a number between 1 and 6.
+If I have 10 columns in my table, I can then create my variable y
+by summing the table over all columns.
+Finally, the number of rows in the table is
+going to be equal to the number of realizations of the variable y
+that I would like to generate.
+Let's look at this on the white board.
+I'm going to generate a small table in this case
+with just three columns and four rows.
+The first column is x1,
+the second column is x2, all the way to the last column, which is x10.
+My rows in the table would then correspond to different realizations
+of the variable y.
+So for example, my first realization of y
+is called a y1, would be the sum over the 10 different columns of the table.
+My second realization of y would be a sum across the second row
+and over all of the 10 columns of the table.
+The only problem is that we don't know how to generate
+an area of random integers in NumPy.
+Let's Google it.
+The first hit is NumPy.random.randint.
+That looks promising
+so let's take a closer look at the help page.
+This function looks promising.
+If you look at the input arguments, we have to provide at least one argument
+but we can potentially provide up to three different arguments.
+Let's try out this function.
+I'm going to type np.random.ranint.
+I will generate just one realization.
+And the function seems to be working fine.
+When dealing with relatively large amounts of data, such as large arrays,
+it's very helpful to start small when writing your code.
+Starting small keeps things much more manageable
+and the fact that you can look at the data on the screen
+makes it much easier to locate potential problems.
+Instead of having 10 columns, I'm just going
+to be using three columns for now.
+Also, instead of having 100 or 1 million rows,
+I'm just going to go with just 10 rows.
+Let's generate this random array in NumPy.
+I'm going to call this variable capital X. We'll type np.random.randint.
+We'll use the same start and end points, except that in this case
+we need to provide a third argument, which is the size of the array.
+We would like to have 10 rows and 3 columns.
+If we now look at the variable x, we see that it has 10 rows and 3 columns.
+We can also check the shape of the array by using
+the shape function x dot shape.
+Python tells us x has 10 rows and 3 columns.
+The next step would be to sum over all rows of x.
+NumPy has a function called sum
+but I'm not fully sure how to use it,
+so let's look at the documentation.
+We could also Google this
+but in this case, I'm going to be using the command line help in iPython.
+To do that, I'm going to be typing np.sum.
+And Python returns to me information about the np sum function.
+Scrolling to the top of the page, I see that only one argument, a,
+is necessary, which is the array of elements.
+The second optional argument is called axis.
+When using two dimensional or higher dimensional arrays,
+we need to specify the dimension on which the sum is taken.
+Let's practice using the NumPy sum function.
+If we type np.sum, we get a sum over all of the elements of the array.
+We can also specify the axis or dimension along which
+we would like to take a sum.
+We can also provide the optional argument axis, in this case equal to 0,
+in which case we are summing over all of the rows of the array.
+We can also try summing over dimension 1, in which case
+we're summing over all of the columns.
+If we had a three-dimensional array, to sum over the third dimension,
+we could set the argument axis equal to 2.
+In this case, when I run this, Python gives me the error message--
+axis entry is out of bounds.
+This is because I'm trying to sum over axis dimension 2,
+whereas I only have two dimensions -- dimensions 0 and 1.
+Summarizing our finding, taking a sum over dimension 0 sums over rows,
+and taking a sum over dimension 1 sums over columns.
+So I'm now ready to write my y variable.
+I'm going to define y as np sum of x over axis equals 1.
+If I now inspect my variable y, I'll see that it has 10 elements as expected.
+Let's now put our code together.
+The first line is going to be, again, random.randint 1 comma 7.
+And I will now insert the actual dimensions of the array --
+100 rows and 10 columns.
+My y variable is going to be formed as a sum
+so I'm using np sum of x.
+And here I specify axis equal to 1, which is dimension 1 of the array.
+If you wanted to plot the histogram of this, we can just say plt.hist of y.
+Let's try running this code.
+In this case, we see that Python plots a histogram, which looks very
+similar to the histogram we saw before.
+But let's see what happens as we increase
+the number of rows in our table.
+I'm going to go back to my code and modify the 100 to 10,000.
+I will also put a semi-colon at the end of plt.hist
+to suppress the output of the histogram function.
+And we can see that the histogram looks smoother.
+I can further increase the size of the table to 1 million.
+Remember, in this case we're generating 1 million realizations of variable y.
+And the histogram looks even more smooth in this case.
+You can see that this code is shorter than our previous code
+for the same example that didn't make use of NumPy.
+Another difference you probably noticed is that this code is much faster.
+Generally, using NumPy can result in code
+that runs over 10 times faster than standard Python code.
+In scientific computation, this makes a big difference.
+
+2.4.4: Measuring Time
+It is often helpful to be able to measure how long a segment of code
+takes to run.
+One reason for wanting to know might be that you
+have two or more ways of coding up the same task
+and you'd like to know which one is faster.
+Another reason might be that you have a large dataset
+and you'd like to have a sense ahead of time
+how long it might take to run your code.
+You could do this by running the code for smaller datasets first, time the
+running time, and then extrapolate from there to the running
+time for the whole dataset.
+A simple way to measure time in Python is to use the time module.
+We will import the module by saying import time.
+One of the most useful functions in the time module is the time.clock function.
+That gives us the current time.
+We can capture that in a variable called start time.
+So we just type start_time equals time.clock.
+And then we can run this again to extract the end time.
+I'm going to call that end time.
+So end_time equals time.clock.
+If I want to see how much time has elapsed between these two time points,
+I can take my end time and from that, I will subtract my start time.
+There are a few different ways to measure time in Python and each of them
+has its uses.
+But for many purposes, such as comparing performance,
+time.clock is the right function to use.
+Working with our previous example, the one that relied only on pure Python,
+I have the code here in front of me.
+In order to time its performance, I'm first
+going to catch the start time by saying start_time equals time.clock.
+The code will run
+and once it's finished, I went to capture the end time.
+So I capture time here again.
+And then what I'd like to do is print the difference between end time
+and start time.
+Let's try running this code.
+In this case, we might expect this to take somewhere between 5 seconds
+and perhaps up to 1 minute, depending on the speed of your computer.
+Let's then look at the second implementations of this example,
+the one that relies on NumPy.
+Again, we will capture start time,
+and will the same once the code has run.
+In this case, we just have two lines for the code.
+And in the end, we just want to print out the difference between end time
+and start time.
+We would expect this code to run much faster because it makes use of NumPy.
+In this case, the code runs almost immediately.
+Let's look at the difference in performance
+between these two different ways of implementing the same example.
+I'm going to take the time I got from the first example, the pure Python
+implementation, and I will then divide that by the time I got using NumPy.
+In this case, we see that the NumPy implementation is over 80 times faster
+than the Python-based implementation.
+
+2.4.5: Random Walks
+This is a good point to introduce random walks.
+Random walks have many uses.
+They can be used to model random movements of molecules,
+but they can also be used to model spatial trajectories of people,
+the kind we might be able to measure using GPS or similar technologies.
+There are many different kinds of random walks, and properties of random walks
+are central to many areas in physics and mathematics.
+Let's look at a very basic type of random walk on the white board.
+We're first going to set up a coordinate system.
+Let's call this axis "y" and this "x".
+We'd like to have the random walk start from the origin.
+So this is position 1 for the random walk.
+To get the position of the random walker at time 1, we can pick a step size.
+In this case, I'm just going to randomly draw an arrow.
+And this gives us the location of the random walker at time 1.
+So this point here is time is equal to 0.
+And this point here corresponds to time equal to 1.
+We can take another step.
+Perhaps in this case, we go down, say over here.
+And this is our location for the random walker at time t is equal to 2.
+This is the basic idea behind all random walks.
+You have some location at time t, and from that location
+you take a step in a random direction and that generates your location
+at time t plus 1.
+Let's look at these a little bit more mathematically.
+First, we're going to start with the location of the random walk at time t
+is equal to 0.
+So position x at time t is equal to 0 is whatever
+the location of the random walker is at the beginning of the random walk.
+We're going to call that x0.
+These are step 0.
+The next step is going to be the location of the random walker at time t
+is equal to 1.
+This will be given to us by the location of the random walk at the previous time
+step, t is equal to 0, plus some displacement, delta x,
+at time t equal to 1.
+Because x at t0 is simply given by this term over here,
+we can simplify this to x0 plus delta x at time t equal to 1.
+Let's then look at the next step.
+The location of the random walker at time t is equal to 2.
+Again, the basic idea is the same.
+The new location is going to be the old location, meaning x at time t
+is equal to 1 plus some random displacement delta x at time t
+is equal to 2.
+Note that the index of the random displacement
+matches the index of time over here.
+From what we have above, we see that we have the location at time t equal to 1
+here, which we know to be equal to this term over here.
+What that means, I can now rewrite this part as this expression here.
+So we have x0 plus delta x at time t equal to 1 plus delta x at t
+equal to 2.
+This term over here is just the same term that we had above here.
+All we've done is we've just copied that term over here.
+We can see that a common pattern starts to emerge.
+To note the location of the random walker at time 2,
+we had the initial location plus displacement at time t equal to 1
+and t equal to 2.
+From this we can write down the general equation
+for the location of the random walk.
+We start with x at some point in time, t is equal to k, for example.
+We will always have the initial location x0,
+and this is going to be followed by a sum of displacements.
+The first displacement is going to be this term delta x at time t equal to 1.
+This will be added to the displacement delta x at t equal to 2 all the way
+to displacement delta x that corresponds to t equal to k.
+In other words, the location of the random walker at any point in time
+is given by the initial location x0 plus the sum of all of the displacements
+from 1 to k.
+Let's review the logic of the argument here.
+First we start at time t is equal to 0, which
+we decided we're going to call x0.
+Then at time t equals 1, we take the previous location
+that we had at time t equal to 0, and then we
+add a random displacement to that.
+That gives us location at time is equal to 1.
+I'm going to use the blue color for this.
+Then when we look at the location of the random walker at time t is equal to 2,
+we take the location at t is equal to 1 as a starting point.
+Again we add the random displacement.
+The final result is the following.
+To find out the location of the random walker at time t
+is equal to k, we take the initial locations of the random walk,
+and to that we add a sequence of random displacements.
+If we're interested in the location after k steps,
+then we will have k such random displacements in the sum.
+We've just seen that the location of the random walker, at any given time t,
+is given by a cumulative sum of the previous t displacements
+leading up to that point.
+Let's try coding up random walker in NumPy, where we start at the origin,
+take 100 steps, and where each step is sampled
+from the standard normal distribution.
+The normal distribution having mean 0 and standard deviation equal to 1.
+We're also going to assume that the x displacement and the y
+displacement for any given step are independent, such
+that the displacement in the horizontal direction
+has nothing to do with the displacement in the vertical direction.
+We can start by generating the displacements.
+I'm again going to keep the numbers small and started with just five steps.
+Let's generate a two by five table of numbers for each element,
+each of the 10 numbers is drawn independently
+from a standard normal distribution.
+To do this, we will use the np.random.normal function.
+In this case, we'll be typing np.random.normal.
+The first argument is the location or the mean.
+The second one is the standard deviation, which is 1.
+And we wanted to generate a two by five table, two rows and five columns.
+And we can try running this a couple of times
+to see that the dimension of the table matches what the expectation was.
+I'm going to call this table delta x, because this encodes
+the displacements of the random walker.
+So delta x equals np.random.normal.
+Let's then pull up these displacements.
+We can take the first component of each vector
+as the x-coordinate and the second component as the y coordinate.
+We're going to be using plt plot for this.
+So we'll say plt.plot.
+We'll be taking the delta x array.
+We would like to get row 0 from that array.
+That's our x component.
+And our y component, the second argument of the plot function,
+is going to be delta x1, which is row one of delta x.
+Then as the third argument, I can specify the color and marker.
+I like to be using green circles for this plot.
+And then we run the code.
+What is shown here are the displacements that we
+generated from the normal distribution.
+It may seem like we're just getting started with this example,
+but in fact we're almost done.
+The one missing piece that we need is what is called a cumulative sum.
+Let's first look at what that means.
+Let's have some numbers-- 2, 4, 1, 3, and 2.
+Underneath we'll write the cumulative sum.
+The first element is just going to be equal to 2, the first element here.
+The next element is going to be whatever we had here plus the element above.
+2 plus 4 gives us 6.
+This element is going to be 6 plus 1, that's 7.
+7 plus 3, that's 10.
+10 plus 2, that's 12.
+But how can we do a cumulative sum in NumPy?
+Let's just Google that to find out.
+Cumulative sum in NumPy.
+In this case the first hit gives us what we would like.
+NumPy has a function called cumulative sum,
+and it requires at least one argument.
+In this case the function requires one compulsory argument, which
+is an array, in this case called a.
+The second argument, axis, which is optional,
+specifies the axis along which the cumulative sum will be computed.
+Let's practice the use of the cumulative sum.
+np.cumsum.
+It's going to be applied to delta x, which is the first argument.
+And the second argument specifies the axis.
+We're going to be using axis equals 1 because we
+would like to take the cumulative sum over the columns of this array.
+I would like to store this result. I'm going
+to store that in X-- that's capital X. And if we
+look at the contents of the array, we will
+see that we now have a cumulative sum taking over the columns.
+We can contrast this with delta x, which only gives us the increments that we
+sampled from the normal distribution.
+Let's now put the different pieces together.
+First we generate the random displacements, np.random.normal,
+mean 0, standard deviation 1.
+And the size of the array is two by five.
+This gives us our delta x, our random placements.
+On the following line we'd like to define
+x, which is the position of the random walker at any given time.
+So we apply the cumulative sum here, applied to delta x,
+and axis being set to 1.
+Finally, we want to plot this using plt plot.
+First we'll plot the row 0 of our X array
+and then we plot row 1 of the array.
+Let's try running the code.
+Let's try making a small modification to the plot.
+I would like to be using red circular markers,
+and I would like them to be connected with straight lines.
+I would then like to save this figure.
+So I'm going to be using this Savefig command.
+And I'm just going to call this rw, short for random walk.
+And I'd like that to be a PDF file.
+I will then run the code.
+And let's look for the PDF file on my computer.
+This shows us the first four steps of the random walk,
+but there is one problem here.
+Remember how the random walk was supposed to start at the origin,
+at location is 0,0?
+Right now we're missing that very first point.
+But let's add that element to our array.
+In this case the origin is represented by a two by one array consisting of 0s.
+And we'd like to concatenate that to our array called X. Let's again use Google
+to find out how to do that.
+How to concatenate NumPy arrays?
+Again, the first hit looks promising.
+In this case we need to provide two arguments.
+The first argument is a tuple of the arrays
+that we would like to concatenate.
+The second argument, axis, is the axis along which the arrays will be joined.
+So the missing step for us to do is to generate the array X_0.
+And we know that this is an NumPy array.
+It consists of two rows, each having just one element, 0.
+These array X_0 gives us the initial location of the random walker.
+Let me take this line of code and move the top here in my window above.
+And we can now write the concatenation function.
+We start with np.concatenate and we need to provide two arguments.
+First is a tuple of the arrays that we would like to concatenate.
+And a second argument, axis, specifies the dimension of concatenation.
+In this case, axis is going to be equal to 1.
+Let's now look at the tuple argument a little bit more carefully.
+The first array is going to be X0, the starting point of the random walk.
+For the second argument, we will need to insert our cumulative sum from above.
+So this is the cumulative sum applied over delta x along axis 1.
+This entire expression here will give us the location
+of the random walker, which is x, this time including
+the origin as the starting point of the walk.
+We can now inspect the array X. And we'll see that the first element is 0.
+We are now ready for our final solution.
+Let's first copy this bit of code from here.
+This replaces our previous definition of X. So we now define X0,
+we generate our delta x's, we then define
+X the location of the random walk, and we then make the plot.
+Finally, we'll save the figure.
+I'm going to save the figure now to a file called rw2
+and we can run the code.
+Let's again look at the PDF version of the plot that we just generated.
+We're looking for rw2.
+And we can see that this time the random walk does start at the location 0,0,
+at the bottom of the figure.
+Let's now run this 100 times.
+We're going to change the argument here that specifies
+how many random displacements I would like to generate from my random walker.
+I'm going to save this in file rw3
+and then we'll run the code.
+We can look at the file,
+searching for rw3,
+and this is our random walker which takes, in this case, 100 steps.
+To wrap this up, let's generate a couple of realizations of random walk
+taking 10,000 steps.

@@ -1,0 +1,581 @@
+3.2.1: Introduction to Language Processing
+Patterns within written text are not the same across all authors or languages.
+This allows linguists to study the language of origin
+or potential authorship of texts where these characteristics are not
+directly known such as the Federalist Papers of the American Revolution.
+In this case study, we will examine the properties of individual books
+in a book collection from various authors and various languages.
+More specifically, we will look at book lengths, number of unique words,
+and how these attributes cluster by language of or authorship.
+Project Gutenberg is the oldest digital library of books.
+It aims to digitize and archive cultural works, and at present,
+contains over 50,000 books, all previously published
+and now available electronically.
+These books are in the public domain which
+means they can be downloaded and read for free.
+We have downloaded a collection of over 100 titles
+from Project Gutenberg for analysis as a sample library for this case study.
+The downloaded sample consist of several nested folders.
+At the top level, we have four languages: English, French, German,
+and Portuguese.
+For each language, we have from one to four authors each, 13 authors in total.
+For each author, we have from 1 to 16 books, 102 books in total.
+Some authors have appeared in several language categories
+because their books are available as translations in several languages.
+This data set is available as part of the HarvardX course.
+Our goal is to write a function that given
+a string of text counts the number of times each unique word appears.
+What's the best way to keep track of these words?
+Because we'd like to associate each word with a counter,
+Python dictionaries are a very natural choice.
+Here, the keys are strings, the words containing the input text,
+and the values are numbers that counts indicating how many times
+each word appears in the text.
+
+3.2.2: Counting Words
+Before we start coding the function itself
+it's helpful to create a test string.
+I'm going to call that text, and I'll just
+copy paste a short string that I wrote previously.
+The purpose behind having a text string like this
+is to be able to test our function as we make progress with it.
+Since this function will keep track of all unique words
+and count their frequencies, I'm going to call this function count_words.
+It's a function so we'll need the def statement
+and the input argument is going to be just simply text in this case.
+We agreed that using a dictionary would be
+a good solution for this specific task.
+I'm going to create an empty dictionary called word_counts.
+The next step for us is to break the text down into words.
+To accomplish that we'll be using the split method and the character
+we want to use for splitting is just an empty space.
+This will give us a list that we can loop over so this calls for a for loop.
+Because the items in the sequence or list are words,
+I'm going to be using word as my lop variable.
+So for word in text.split.
+And now we're ready to loop.
+There are two possible things that can happen as we loop over our text.
+We can either come across a word that we've seen before, in which case,
+we have to increase the counter associated with that word by one.
+In case we see a word we haven't seen before,
+we have to establish that entry in the dictionary
+and initialize the counter to be equal to 1.
+So let's divide this into two subtasks.
+We have the case where we have a non-word
+and the second case is where we have an unknown word.
+Let's deal with the non-word case first.
+What we'd like to test for is, whether this word
+has appeared in this dictionary before.
+This calls for an if statement.
+If word in word_counts.
+So now we know that we have seen this word before.
+What we need to do is we need to access our dictionary word_counts
+and we want to increase the counter that's
+associated with this specific word.
+We want to increase that by 1.
+And I'm using the shorthand operation here.
+This is the non-word case.
+The other situation is where we come across a previously unseen word.
+We can use the else statement here.
+In this case we still like to access the word_counts dictionary.
+But in this case we have to set that counter to be equal to 1,
+because this is the first instance of the word that we're seeing.
+That deals with the second case, the unknown word.
+At this point, we are ready to return the dictionary
+to whoever called the function.
+We need one more statement in our code, in our function,
+which is the return statement.
+So we need to return word_counts.
+Before we move on, let's make sure to add a docstring in our function.
+Now that we have defined the function, let's run it.
+And the function has now been defined.
+We also want to make sure we have our test text defined
+and now we can try running the function and see what happens.
+And as expected Python returns a dictionary to us
+where the keys are words, unique words,
+and the values associated with these keys
+are the number of times each word occurs in the text.
+Having some test data handy is very useful.
+Looking at the dictionary, one obvious shortcoming of our current routine
+is that it includes punctuation like periods, or full stops,
+as part of the word.
+This would lead to an inflation of the word count
+because, for example, a word that appears in the middle of the sentence
+will be counted separately from the same word
+if it appears at the end of a sentence and is immediately
+followed by a period.
+Another problem is that if the word appears at the beginning of a sentence,
+its first letter is capitalized, again giving rise
+to double counting of some words.
+To address these issues, we're first going to turn the text into lower case.
+This means that any word, whether capitalized or not,
+will count as one word.
+Addressing punctuation is a bit more complex.
+Our strategy is to first specify all the punctuation marks
+that we'd like to skip, and then loop over that container
+and replace every occurrence of a punctuation mark with an empty string.
+As the first task we need to turn the text into a lower case.
+We can do that using the lower method and then
+we just have to recapture that new text.
+So we're typing text=text.lower.
+The second thing we need to do is, we need
+to define the characters that we will be skipping
+as we're looping over the text.
+We'll construct a list for this purpose, and we
+can include a few of the most common punctuation marks
+here that we'd like to skip.
+For example we can include period, comma, semi-colon,
+colon, have single quote, and we can also include double quote.
+In this case we have to use single quotes for Python's own string.
+The reason we cannot use double quotes for the last string is because double
+quotes are also used to begin and end a string.
+This is why we'll be using single quotes, which
+surround the character that we really want to represent,
+which is a double quote.
+The next step for us, is loop over all of the skip characters
+and replace them with an empty string.
+This calls for a for loop.
+We'll be taking our text and we will replace ch, the skip character
+in question, with an empty string.
+We then also want to capture the modified string that the replace method
+returns, and this part is done.
+Finally, to complete this modification to our function,
+we want to make sure to update the docstring
+to reflect the change we just made.
+We'll just say skip punctuation.
+Let's then run the definition of our function.
+And now we can try running the function using our test
+string that we had defined before.
+In this case, looking at the output, it's a dictionary before,
+but you'll notice said all of the keys are lowercase, which is what we wanted.
+We also go to def the punctuation marks that we included in the skips list.
+It's useful to be able to write your own counting routine like we just did.
+However, counting the frequency of objects
+is such a common operation that Python provides
+what is known as a counter tool to support rabbit tallies.
+We first need to import it from the collections module, which
+provides many additional high performance data types.
+The object returned by counter behaves much like a dictionary,
+although strictly speaking it's a subclass of the Python dictionary
+object.
+Let's modify our function to use the counter object.
+In this case, I would like to retain both my original function and the one
+that uses to counter object.
+Our first step is going to be to import that,
+so from collections import counter.
+To start the function I'm going to take my previous function
+and I'm just going to copy paste it here underneath.
+This is the code that I'll be working with.
+Because this is a different function because it's
+using the counter object from collections,
+I'm to call this something else.
+I'm going to add the word fast at the end.
+The counting takes place in the last few lines of the code.
+We don't change the first part where we simply convert the text to lowercase,
+and we also want to keep the part that skips over punctuation characters.
+The only thing that will be changed is the looping
+over individual words in our text string.
+The last several lines of the code can all simply
+be replaced with a single expression.
+We will define word_counts on this line, which is the first time we're using it.
+The input to our counter object will be the text
+that we would like to use for counting.
+We'll take our text, we'll split it to get the words, and we're done.
+Before we run the function let's first do the import.
+We can now run the definition of the function
+and then we can test it on our test dataset.
+In this case, again as expected, the function
+returns a counter object which looks essentially identical to the dictionary
+object.
+Let's see if the objects returned by these two different functions
+are actually the same.
+We'll first call the count_words function using our text.
+And we want to ask Python if that's equal to the object which is returned
+by count_words_fast on that same input.
+In this case, the answer is true, therefore
+we know that these two different implementations of the same function
+return identical objects.
+
+3.2.3: Reading in a Book
+We're familiar by now with reading files.
+But here we'll include an additional argument.
+Character encoding refers to the process how
+computer encodes certain characters.
+In this case, we'll use what is called UTF-8 encoding, which
+is the dominant character encoding for the web.
+We will also replace backslash n and backslash r characters.
+Since this function reads a book we're going to call it simply read_book.
+The input argument requires the path of the title of the book
+so we'll call this argument title_path.
+Since we're defining a function we need the usual def statement
+at the beginning.
+We're going to start this time by writing the docstring.
+This function will read a book and return it as a string.
+We'll be using the with statement that we saw in the previous case study.
+So with open(title_path) we're opening the file for reading.
+And then we need to specify encoding, which in this case is utf8.
+We will open this file as current_file.
+We'll get the text by reading in the current_file.
+The missing step for us is to replace the backslash n
+and backslash r characters with an empty string.
+So we take our text, we'll first replace backslash n with an empty string.
+This returns a string
+and we can just train the second replace method right after the first.
+In second replace we're replacing backslash r with an empty string.
+Finally, we need to make sure to capture the object that we have just created.
+At this point, all that is left there to do
+is to return our text object to the caller.
+We can try out our code
+so let's try reading in Shakespeare's Romeo and Juliet.
+We'll first run the function definition so our function is defined.
+At this point, we are ready to read in a book.
+In this case, I'm just going to be entering the path manually.
+Looking at the length we'll see that Python
+has read in approximately 170,000 characters, which is
+all of Shakespeare's Romeo and Juliet.
+There's a famous line in Romeo and Juliet.
+Let's see if we can find it.
+To do this we'll be using the find method.
+The line starts, "What's in a name?"
+The find method will return the index if it finds the substring.
+Let's see what happens.
+In this case, we have an index returned by the find method
+so we know that the substring is part of the text.
+Let's extract a sample text starting from this location.
+So we'll say, sample_text equals text.
+We'll start from index.
+We'll do a slice that contains 1,000 characters.
+And let's look at the sample text.
+In this case, we will see the sample text does start
+with the famous line, "What's in a name?"
+So we found the appropriate line.
+
+3.2.4: Computing Word Frequency Statistics
+Given a dictionary or a counter object from the collections module,
+we would like to know how many unique words there are in a given book.
+We'd also like to return the frequencies of each word, meaning,
+count-specifying how many times each word has appeared.
+To do this we'll be writing a word stats function.
+Our function is going to be called words stats, short for word statistics.
+And the input is going to be word counts, which
+is returned to us by the other function we previously wrote.
+The first thing we want to accomplish is to count the number of unique words.
+To do that we can take the word counts object
+and simply ask what is the length of that object.
+We know that each entry in the dictionary is going to be unique
+and therefore the length of that object is
+going to return to us the number of unique keys we have,
+meaning the number of unique words.
+I'm going to call this number unique, num unique for short.
+And this accomplishes the first part.
+The second task is to return the word counts for every single unique word
+in the dictionary.
+We'll start with the word counts dictionary.
+We'd like to extract the values the counter is from this object, which
+we do using the values method.
+I'm going to simply call this counts and that's the frequencies
+of each word in our text.
+Finally, we need to return these two objects.
+So I'll be returning a tuple, which consists of num _nique and counts.
+Let's add a short docstring.
+We can do just a simple one-line docstring here
+saying return number of unique words and word frequencies.
+Let's then try running our function.
+Let's first read in the text, the book.
+Here is the path to Romeo and Juliet.
+So we're just trading the text.
+Then let's count the words.
+So word counts is equal to count words in text.
+And then we can ask the word stats to return
+the number of unique words and the word frequencies to us.
+If we look at the contents of number unique
+we know that Romeo and Juliet has a total of 5118 unique words.
+If we'd like to know how many words there are in total
+we can do a sum of the counts,
+and it's approximately 41,000.
+Let's use the word stats function to compare Shakespeare's Romeo and Juliet
+in English with its German translation.
+I will first take the code that we have here
+and I will copy paste that in the editor above.
+So we first read the text.
+We then perform the word counts.
+And then we run our word stats function on what we just read.
+All of these operations will be identical for the German version,
+except for the name of the book.
+We first have to go to our German directory,
+and in German it's called Romeo und Julia.
+Then we'd set print function here.
+Number unique and some counts.
+That takes care of that.
+We'll use the same exact line here.
+We'll create a little space here.
+Let's try running this.
+We know the result for English.
+Same as before, which is good.
+We'll do the same operation for the German version
+and we'll find the outcome is a little different.
+The German translation of Romeo and Juliet
+appears to contain about 7,500 words, but in length it's about 20,000.
+
+3.2.5: Reading Multiple Files
+Being able to navigate file directories is very important.
+Our goal here is to read every book contained in the various subdirectories
+of our book folder.
+In order for us to read directories, we first need to import the OS module.
+I also want to be keeping track of my book directory.
+I'm going to call that book_dir.
+And it's the directory we've seen before.
+"./Books", let's just run that as well.
+Let's see how the function works.
+Os.listdir[book_dir).
+In this case, Python is telling us that the present directory contains four
+items: 'English', 'French', 'German', and 'Portuguese'.
+These are subdirectories for books in these four different languages.
+We want to read all of the directories that are contained within the book
+directory.
+The first level is going to be the language directories.
+We first want to generate a list of the directories that are contained within
+our "./Books" directory which we can do by saying os.listdir(book_dir).
+And we'll do this in our book directory.
+This returns us to a list which we can loop over.
+Since these directories will correspond to different languages,
+I'm going to call the loop variable language.
+So we'll say for language in os.listdir(book_dir).
+The second layer is going to be the author directory.
+For author in os.listdir(book_dir).
+In this case, we need the book directory.
+But we need to add the new directory that we're currently
+in which is the language.
+We can do this by concatenating strings.
+We take our book directory, we add the "/".
+And to that, we concatenate the language.
+This is our second loop.
+Finally, we want to be looping over all of the titles that
+are contained within this directory.
+So we'll go with title.
+And in this case, we need the same as we had before, book_dir + "/" + language.
+But we need one more component here.
+First "/" then + author.
+Just to be clear, our first for loop is looping over languages.
+The second for loop is looping over authors.
+And the third, the innermost for loop, is looping
+over different titles, different books.
+I'm going to define my input file here which
+is the directory that I had before.
+But we basically need to add one more thing.
+First our "/" then our title.
+This is the path, the full path, of the book,
+starting from my present working directory.
+It's useful to print this out to make sure
+that my function is working correctly.
+So I'll just print that out using the print function.
+On the next line, I want to read in the book.
+So we just say read_book.
+I can now use the short name for my input file.
+At this point, two more things remain to be done.
+First, we need to count the number of words in our text.
+And then we need to compute our word statistics.
+Let's first count the words.
+The input is text.
+And we can actually take this input and feed it right into our words stats.
+Function.
+So what's happening here is the following.
+We're first taking our text.
+That gets fed into our count_words function.
+That returns to an object that then gets pushed into the words text function
+which returns as an object.
+We'll then need to capture the object that's returned, which is a tuple.
+So we're unpacking a tuple.
+Num_unique, and counts.
+And that should do it.
+Let's try running our function.
+We first have our import and the definition of the book directory.
+And then we have our code here.
+You can see what's happening here.
+Python is first looping over all languages.
+And for each language, is looping over all authors.
+And for each author, it's looping over all of the titles.
+The benefit of having a print function in your code,
+is that you can follow Python as it's reading through your 102 books.
+pandas is a library that provides additional data structures and data
+analysis functionalities for Python.
+It's especially useful for manipulating numerical tables and time series data.
+pandas gets its name from the term panel data
+used to refer to multi-dimensional structured data sets.
+Let's create a simple table using pandas.
+We'll first import pandas as pd which is the convention.
+We then want to create a table.
+The most common data structure in pandas is what's called a data frame.
+This is very similar to the data frame structure
+you might have seen before in R.
+This case, we'll simply demonstrate how to create a table using
+the pandas DataFrame function.
+I'm going to call my table, simply, table.
+We need the DataFrame command.
+And inside, we need to specify the columns of our table.
+Let's have a table that has only two columns.
+The first one being name and the second one being age.
+Now we can add new entries to our table based on the location of these entries.
+Let's see how that works.
+We do this by first typing table.
+And we can specify the location, within the table, where we
+would like the following entry to go.
+I'm going to start at location one.
+And you can think of that as the row one of table.
+The first entry is a name.
+So it has to be a string.
+Let's say James.
+The second might be age.
+Let's say 22.
+I can add a second entry.
+A second row to my table.
+I need to modify the location.
+Let's change the name.
+Let's have Jess.
+Let's say Jess is 32.
+And now we have two entries in my table.
+I can inspect my data object by typing its name, which in this case, is table.
+To get the columns of my table, I can type table.colums.
+In this case, I had only two columns: name and age.
+We can now use pandas data frame to keep track of our book statistics.
+Let's see how that works.
+Let's go back to our previous code.
+I first need to do the import statement here so I can use pandas.
+And the next step is to create an empty table.
+I'm going to call that table stats.
+It's a data frame.
+And I want to define the names of the columns.
+And in this case, we'll define a few columns.
+I'll call them "language", "author", "title", "length".
+And I'm missing a quote there.
+And "unique".
+And we'll put that in quotes as well.
+You can capitalize these terms to your liking.
+In this case, I'm just doing everything lower case.
+This line will create an empty date frame, an empty table,
+that has these five columns.
+To add data to our table, we also need to keep track of the role of the table.
+To do this, we'll define a variable called title_num.
+And we're going to start that with 1.
+To start the data in our table, we need to add a line at the end of our code.
+We use the same syntax as before.
+We insert the new line, new row, and the specific location.
+In this case, we'll use title_num.
+And before we forget, we have to make sure to increase
+that counter once we're done.
+And we insert, to this specific location,
+some of the elements that we care about.
+Language is our first column.
+Author, our second.
+Title, our third.
+Then we need to add the length of the book,
+meaning the number of words in that book.
+We've seen how to use this before.
+We're just summing over the counts that we obtained before.
+And finally, we'll add num_unique here.
+And with that, we should be done.
+We can then run our code.
+And we can see that it seems to run.
+Let's now look at our table which is called stats.
+In this case, we can see that the data frame has 102 rows and five columns.
+If you have a large table, it will probably not
+fit on the screen in one go.
+That's why it's helpful to be able to look at the top five, or bottom five,
+rows of your table.
+Let's look at our stats table.
+Head gives us the top five lines.
+And tail gives us the bottom five lines.
+In this case, it looks like our table is correctly populated.
+Looking at the table, I would like to make two small modifications.
+First, I would like to make sure that the authors always appear capitalized
+in the table.
+Second, I would like to get rid of the .txt file extension in the title
+of the books.
+Let's modify our code accordingly.
+Author name is the second column in our table.
+To capitalize this, you can just say capitalize.
+To modify the title, we replace .txt with an empty string.
+Now the other names will appear capitalized and the titles will appear
+without the .txt.
+Let's fix that comma into a period.
+Let's try running this again.
+Python has just read over 100 books for us.
+We also got the head.
+Now I just got the tail of the table.
+So we got rid of the .txt file extensions and the others now appear
+capitalized.
+
+3.2.6: Plotting Book Statistics
+We can easily extract specific columns from our pandas table using the names
+that we've given to those columns.
+Let's practice this.
+Stats.length gives me access to the length of the different books.
+We can also try looking at the unique column,
+and again, we get access to different data in our table.
+To make the plots, we first need to import matplotlib.pyplot,
+and we'll import that as plt. Let's first try making a very simple scatter
+plot.
+We can use the plt.plot function.
+On the x-axis we'll plot length.
+On the y-axis we'll plot unique, the number of unique words.
+I'd like to use blue circle for this, and let's see what happens.
+In this case, we can see the plot.
+Again, in the plot on the y-axis, we have the number of unique words,
+and on the x-axis, we have the length of the book measured in number of words.
+Let's make a different version of our plot.
+Let's use the loglog version, which plots
+both x and y-axis logarithmically.
+In this case, on the loglog plot, we see a straight line.
+The fact that we see a straight line will later
+suggest some data modeling strategies that we might be able to use.
+Using pandas, we can also stratify data, for example, by language.
+Let's take our stats table.
+We'd like to look at those elements for which language is equal to English.
+In this case, we only have seven entries in English.
+We can do the same for French.
+In this case, we see we have many more entries.
+Let's construct a plot using different colors for different languages.
+This allows us to try out some of the interesting color options
+that Python has.
+Plt uses essentially the same names for colors as HTML does,
+the markup language used to create webpages.
+So if you'd like to learn more about color options,
+you can just google "html colors."
+Finally, we would like to prepare the plot.
+We'll do a 10 by 10 plot.
+Then we have four more subsets, so we stratify our data.
+We take our stats, but we only look at those columns, those entries,
+for which language is equal to English.
+Then we'll do a loglog plot, so plt.loglog.
+The x-axis is going to be subset.length, subset.unique, dot unique.
+We'll use circle as markers, and we'll add a label,
+and we'll add a color, for which we'll use crimson.
+We can then proceed the same way for the other languages.
+So the second language is going to be French.
+Change this to French.
+For French, we'll use forest green.
+Then we'll go with German.
+Change the label to, we'll use orange here.
+And finally we'll go with Portuguese, and we'll go with blue-violet.
+Put these together.
+It's at the legend.
+It's also an x-label, which is "book length".
+Let's add y-label, which is "Number of unique words," words.
+And finally, let's save this, plt.savefig.
+We'll call this lang_plot.
+Now let's try running the code.
+And then go here to
+look for the PDF, and this is our final result. On the x-axis,
+we have the length of the book measured the number of words.
+On the y-axis, we have the number of unique words in each book.
+You'll see that the number of unique words scale, the y-axis,
+goes from about 1,000 to 100,000.
+The book length scale, the x-axis, goes from 1,000 to 1 million.
+That's it.
+We accomplished many tasks in this case study.
+We learned how to count the frequency of words,
+how to navigate file directories, how to use the counter object
+from their collections module, and we also
+learned some very basic ideas about how to use pandas.
+I hope you enjoyed this case study and feel ready to try out
+some of the additional exercises.

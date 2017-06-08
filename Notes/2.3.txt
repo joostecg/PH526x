@@ -1,0 +1,388 @@
+2.3.1: Introduction to Matplotlib and Pyplot
+Matplotlib is a Python plotting library that
+produces publication-quality figures.
+It can be used both in Python scripts and when
+using Python's interactive mode.
+Matplotlib is a very large library, and getting to know it well takes time.
+But often we don't need the full matplotlib library in our programs,
+and this is where Pyplot comes in handy.
+Pyplot is a collection of functions that make matplotlib work like Matlab,
+which you may be familiar with.
+Pyplot is especially useful for interactive work,
+for example, when you'd like to explore a dataset
+or visually examine your simulation results.
+We'll be using Pyplot in all our data visualizations.
+Pyplot provides what is sometimes called a state machine
+interface to matplotlib library.
+You can loosely think of it as a process where you create figures one at a time,
+and all commands affect the current figure and the current plot.
+We will mostly use NumPy arrays for storing the data that we'd
+like to plot, but we'll occasionally use other types
+of data objects such as built-in lists.
+As you may have realized, saying matplotlib.pyplot
+is kind of a mouthful, and it's a lot to type too.
+That's why virtually everyone who uses the library
+imports it as plt, which is a lot shorter.
+So to import the library, we will type the following-- import
+matplotlib.pyplot as plt.
+Now we are ready to start our plotting.
+A basis but very useful command is the plt plot function, which
+can be used to plot lines and markers.
+The simplest version of plot has just one argument,
+and it specifies the y-axis values that are to be plotted.
+In this case, when you provide just one argument, the plot function,
+each y-axis value will be plotted against its corresponding index value
+on the x-axis.
+Because Python indexing starts at 0, the first element of your array or list
+appears at location x equal to 0.
+The second element appears at location x equal to 1, and so on.
+Let's now practice using the plot function in the IPython Shell.
+Let's start by making a simple plot.
+So we'll say plt.plot.
+I'm going to create a list consisting of the numbers 0, 1, 4, 9, and 16.
+You can see here that Python returns a matplotlib object.
+If for some reason you'd like to suppress the printing of that object,
+in the IPython Shell you can add a semi-colon at the end of the line
+and that will do the job.
+If we rerun this with the semi-colon at the end,
+you'll see that the plot still appears, but we don't
+get that matplotlib object printed out.
+Because we are working in IPython, the plots
+will appear inside the Python Shell.
+Well, let's see what happens if, instead of using IPython Shell,
+we used the standard Python Shell.
+Let's first launch the Python Shell.
+I'm going to go to View Panes and Console.
+I'll resize my window a little bit.
+Because we have a new session here, I need to do my import first.
+So I've just imported my plt.
+The next step is to create the plot 0, 1, 4, 9, and 16.
+You'll notice that it seems like nothing has happened.
+In fact, the plot has been created, but because we are not
+working in a Python Shell, not IPython Shell,
+we need to issue the command Show for plt to show the plot.
+So let's try that-- plt.show.
+We can also give the plot function two arguments, in which case
+the first argument specifies the x-coordinates of the points,
+and the second argument the y-coordinates of the points.
+I'm going to create a vector x using np.linspace.
+I want that vector to start at 0 and at 10,
+and I would like to have 20 points in my vector-- in my one-dimensional array.
+I'm going to define my y-vector from the x.
+I'm going to be taking every element of x and raising them to power 2.
+Now I have two vectors defined-- x and y.
+I can now call the plot function where my first argument
+is x and my second argument is y.
+In this case, what we have is the familiar shape of a parabola.
+We can also provide a third argument to the plot
+function, which is a format string that specifies color, marker, and line type.
+Letters and symbols of the format string are the same as in Matlab,
+but even if you're not familiar with those,
+you'll easily learn them with a little practice.
+This is also a good place to introduce what are called keyword arguments.
+The idea is completely generic and applies to all Python functions,
+but with the plt library, it's almost impossible not to use them.
+In short, a keyword argument is an argument
+which is supplied to the function by explicitly naming each parameter
+and specifying its value.
+Two keyword arguments that I use all the time are linewidth and markersize.
+Let's put these different ideas together in an example.
+I'm first going to create my vector x.
+It's a linear vector starting from 0, going to 10, and consists of 20 points.
+I'm going to define y1, which is going to be my x raised to the power of 2.
+Then I'm going to define a second vector.
+Let's call that y2, and this is x raised to the power of 1.5.
+At this point, I have three vectors-- x, y1, and y2.
+I can now call the plot function.
+My first argument is x, my second argument is y1,
+and then my third argument specifies the appearance of the plot.
+In this case, I'm requesting plt to use blue, to use circles,
+and to use a solid line.
+We can try plotting this out, and we see the outcome.
+We can now add our keyword arguments to this function call.
+I can specify linewidth.
+I'm going to set it to 2 in this case.
+I'm going to also specify markersize, which I'm going to set to 4.
+And in this case, you'll see that the linewidth has changed,
+and the size of the markers has also changed.
+If I would prefer larger markers, I could set markersize 12
+and, again, the effect is apparent.
+I can do the same thing for y2.
+I'm going to use this line and build from it.
+I'm going to be plotting x, and I'm going to be plotting y2
+but in this case, I would like to use green squares,
+so I change b to g, meaning from blue to green. And I change circles to squares,
+so I change the o to an s. And I will still stick with my solid lines.
+In this case, we run the line and we see the green plot.
+
+2.3.2: Customizing Your Plots
+There are a few important elements that can be easily added to plots.
+For example, we can add a legend with the legend function.
+We can adjust axes with axis, where axis is spelled A-X-I-S.
+We can set axis labels using xlabel and ylabel.
+And we can save a figure using savefig.
+In that case, the file format extension specifies the format of the file,
+such as pdf or png.
+Let's now add these elements to our previous plot.
+I'm going to construct this plot in the editor.
+So I'm going to take my first line and place that in the editor.
+Then I'm going to take my second line and just copy paste that in the editor.
+If I want to construct the full plot, I'm
+going to find my definition of x, so we have a full example,
+x was defined here.
+Then we had definitions of y1, which was given here.
+And we have also our definition of y2, which is here.
+This is the plot that we've been looking at so far.
+I'm going to start by adding axes labels to this plot.
+I'm going to type plt.xlabel.
+And we'll just put it in an X for the x-axis.
+And we can use the same idea for ylabel, in which case we'll just call it Y.
+If you're familiar with LaTeX, which is the typesetting software often used
+in mathematical publications, you'll be pleased to know
+that plt also knows LaTeX.
+If you're not familiar with it, here's a brief idea.
+We can take a mathematical notation or a symbol like x,
+and we can put dollar signs around that.
+All this does is that it changes the appearance of x and y in your plot.
+Let's try running the plot up to this point.
+If you're not familiar with LaTeX, you can drop the dollar signs
+and we can re-run the code to see what changes.
+Pay close attention to the axes labels.
+The axes labels are still x and y, but the specific appearance of the font
+looks a little bit different.
+Let's then use axis function to adjust the axes.
+So I'm going to type plt.axis parentheses
+and inside goes a list.
+The first argument is going to be xmin.
+The second one is xmax.
+The third one is ymin.
+And the fourth one is ymax.
+xmin specifies where the x-axis starts in my plot.
+I'm going to use the number minus 0.5.
+xmax, I'm going to use 10.5
+so I'm going to be going a little bit over the length of my x vector.
+For ymin, I'm going to be using minus 5.
+And for ymax, I'm going to be using 105.
+Let's try re-running this and see how it changes in a subtle way
+the appearance of the plot.
+You see that the axes have now been adjusted.
+Let's then add a legend to our plot.
+There are two steps.
+The first step is to give labels.
+I'm going to say a label equal to, let's just called this First,
+you'll see that the label is going to be a string.
+I also want to give a label for my second plot.
+I'm just going to call that Second.
+To show the legend, I have to type plt.legend.
+And I can use an additional keyword argument, loc for location,
+to specify the specific location of the legend.
+In this case I would like to use the upper left corner for my legend,
+and we can try running the code,
+and we'll see that the legend appears in the upper left corner.
+Finally, we'd like to be able to save our figure to file.
+To do that, we'll use the savefig function,
+and inside the parentheses goes the name of my plot.
+I'm just going to call that myplot.
+I'd like this to be a pdf plot
+so I'll just enter the pdf file extension here.
+I'm going to run this code
+and Python will now have created a plot called
+"myplot.pdf" in the working directory.
+The working directory is the directory where you have launched your Python.
+Let's see if we can find the plot that we just created.
+I'm going to launch finder.
+I know the name of my plot is myplot.pdf.
+And we can see that this plot has just been created.
+I can double click that to open my pdf.
+In this case, my plot is beautifully stored in a pdf file.
+
+2.3.3: Plotting Using Logarithmic Axes
+In some plots, it's helpful to have one or both axes be logarithmic.
+This means that for any given point to be plotted, its x or y-coordinate,
+or both, are transformed using the log function.
+So what ends up being plotted on the x-axes
+is not the original x-coordinate, but instead the value of log x.
+The logarithm is taken by default in base 10.
+So if, for example, log of 100 is equal to 2,
+but the base can be specified to be something else as needed.
+The plt functions that I used to make logarithmic plots are the following--
+semilogx() plots the x-axes on a log scale and the y in the original scale;
+semilogy() plots the y-axes on the log scale and the x in the original scale;
+loglog() plots both x and y on logarithmic scales.
+To plot both x and y on the original scales,
+you can use to plt function we have just discussed, plt.plot.
+To understand why logarithmic plots are sometimes useful, let's
+take a quick look at the underlying math.
+Consider a function of the form y is equal to x the power of alpha.
+y is equal to x to the power of alpha.
+If alpha is equal to 1, that corresponds to a line that goes through the origin.
+Alpha equal to half gives you the square root, and alpha equal to 2
+gives us a parabola.
+Let's see what we can do with this equation.
+We're first going to take logs of both sides, which gives us
+log of y is equal to log of x to alpha.
+You may remember that in the logarithm, we can pull the exponent here
+to the front of the expression.
+Let's do just that, in which case we end up with alpha being at the front.
+So our alpha ends up being over here.
+In this case, what we have is log y is equal to alpha times log of x.
+We can now think about plotting this on a different set of axes,
+where instead of using our original y, we have log transformed the axes.
+I'm going to call this y prime.
+I'm going to do the same for my x.
+My alpha stays put.
+So my log x becomes x prime.
+So you'll see that on these new axes, we have a much simpler equation.
+Y prime is equal to alpha times x prime.
+So let's look at this as a plot.
+Let me erase my starting point here.
+We have our new axes here.
+We have our x prime, and we have our y prime here.
+The shape of this function is going to be simply a line that looks like this.
+In this case, alpha is going to be given by the slope of this line.
+So the lesson here is that functions of the form y is equal to x to power alpha
+show up as straight lines on a loglog() plot.
+The exponent alpha is given by the slope of the line.
+Let's look at an example of a loglog() plot.
+I'm going to work here with my previous plot.
+Instead of using the plt.plot function, I'm going to replace the plot with
+loglog() and I will do that for both y1 and y2.
+We will then re-run this.
+And in this case, we are plotting the functions on a loglog() scale.
+If you wanted even spacing on the x-axes,
+we can generate numbers that are evenly spaced, not
+on a linear scale which is what we get from np.linspace,
+but on the logarithmic scale.
+To accomplish this, we can use the np.logspace function.
+I'm going to go back to my plot, but instead of linspace,
+I replace lin with log.
+Now, I need to be careful with the start and end points.
+I'm going to start from minus 1.
+Remember that means that my first point is going to be 0.1.
+I'm going to end at 1, which is 10 to 1, meaning the endpoint is equal to 10.
+In this case, I'm going to modify the number of points.
+Let me go with 40.
+We can now re-run the plot.
+And here, we see the result of using logspace.
+In this case, all of the points along the x-axis are evenly spaced.
+
+2.3.4: Generating Histograms
+There are many ways to generate histograms.
+Let's look at one of them, which is using the hist function from the plt
+library.
+To get started, let's first generate some random numbers.
+In this case, we'll use the np random normal function
+to generate 1,000 samples or draws from the standard normal distribution, which
+is a special case of the normal distribution that has mean equal to 0
+and variance equal to 1.
+Let me first import the matplotlib.pyplot library as plt.
+And then I'm also going to import the NumPy library.
+The first step is going to be to create random numbers.
+Here we'll be using np.random.normal.
+And I need to specify how many numbers I'd
+like to draw from the standard normal distribution.
+In this case, I'd like to have 1,000 numbers.
+And I will assign this array into a vector x.
+We'll then call the plt.hist function.
+And Python returns a histogram to us.
+There are many optional parameters in the hist function.
+And the best way to get to know them is to explore online documentation.
+You can just Google plt hist, and you'll get many hits.
+To demonstrate some of the features of hist,
+I'll show how to normalize the histogram and how
+to provide locations of bin edges that are used to construct the histogram.
+By default, hist uses 10 evenly spaced bins
+and it tries to optimize both bin width and bin locations.
+But sometimes you really want to be able to specify the bins yourself.
+Let's go back to our previous example where
+we had generated 1,000 random variables from the standard normal distribution.
+We'll continue working with our plt.hist example,
+except that we will add first one extra argument, which is normed.
+When we set normed to be true, the histogram, in this case on the y-axis,
+instead of having the number of observations that fall in each bin,
+we have the proportion of observations that fall in each bin.
+That's what it means for a histogram to be normalized.
+To provide the location of the bins, we used a keyword argument called bins.
+I'm going to construct the bins using the np.linspace function.
+Remember, the first argument is the starting point.
+I'm going to start at 5, minus 5.
+I want to go all the way to plus 5.
+And I'd like to have 21 points.
+In this case, you see that the histogram looks different.
+That's because we have specified 20 bins between the numbers minus 5 and plus 5.
+In the previous example, we generated 21 points to get 20 bins.
+Let's make sure we understand why.
+If we think about the first example where we just
+have one bin, to have one bin we need to specify
+the start point-- the start location of the bin
+and the end location of that bin.
+So to get one bin, we need two points.
+If we had two bins we would need three points, and so on.
+This is why to have 20 bins, we will need to have 20 plus 1,
+or 21, points along the x-axis.
+Let's then examine another distribution, which is a bit more exotic,
+the so-called gamma distribution.
+It is a continuous probability density function that starts at 0
+and goes all the way to positive infinity.
+The gamma distribution, like the normal distribution, has two parameters.
+For now, we don't need to be too concerned about the nature of the gamma
+distribution.
+We just know that it's some type of probability distribution,
+and we'd like to investigate its shape using histograms.
+In this case, we're going to draw a large number of samples
+from the gamma distribution.
+Let's go with 100,000 samples which would give us a very smooth histogram.
+We'll also meet here a plt function called
+subplot, which enables us to have several subplots within each figure.
+This upload function takes in three arguments where the first two specify
+the number of rows and the number of columns in the subplot,
+and the third argument gives the plot number.
+For example, if you specify two rows and three columns,
+then you will have six subplots.
+The plot number always starts at 1, so in a two by three subplot,
+the plot numbers range from 1 to 6, where the plot numbers
+are incremented across rows first.
+Let's see how this works.
+Let's look at a two by three subplot.
+In this case, we have two rows and three columns.
+So this would be a two by three subplot.
+The first panel in the top left corner is subplot number 1.
+This is number 2.
+And this is number 3.
+Then we move on to the next row.
+We have number 4, number 5, and number 6.
+Let's first draw our samples from the gamma distribution.
+I'm going to call my variable "x".
+We're using the random.gamma function.
+The first two arguments are 2 and 3.
+And the third one specifies that we would
+like to have 100,000 samples from this specific gamma distribution.
+To learn about the different histogram options,
+we have the code up here that demonstrates four different ways
+of drawing a histogram.
+I'll walk you through now each one of them.
+We'll then in the end create one plot that consists of four subplots
+to demonstrate the use of the subplot function.
+First, we'll just use the plt hist function.
+We'll provide x, our input vector, and we specify the number
+of bins, which in this case is 30.
+And this is what the histogram looks like.
+If we'd like to normalize this histogram,
+we can use the keyword argument normed, and we set that to be equal to true.
+In this case, the histogram will be normalized.
+We can also try looking at the cumulative histogram.
+So we'll say cumulative equals true.
+And in this case, we get the cumulative histogram.
+We can also have both normed and cumulative options be on
+at the same time.
+In this case, I can just add normed equals true.
+And I can also change the histogram type.
+I can do that by using the hist type keyword argument.
+And I'd like to use a step histogram here.
+And this is the output that I get.
+We can now pool all of these four different histograms into one figure.
+I will first create a figure by saying plt.figure.
+And I then insert each of these histograms into its own subplot.
+Let's see what happens.
+In this case, we have created just one figure
+with four panels where each type of histogram appears in its own subplot.

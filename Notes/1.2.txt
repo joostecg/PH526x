@@ -1,0 +1,682 @@
+1.2.1: Sequences
+In Python, a sequence is a collection of objects ordered by their position.
+In Python, there are three basic sequences,
+which are lists, tuples, and so-called "range objects".
+But Python also has additional sequence types
+for representing things like strings.
+The crucial aspect about sequences is that any sequence data type will
+support the common sequence operations.
+But, in addition, these different types will
+have their own methods available for performing specific operations.
+Sequences are called "sequences" because the objects
+that they contain form a sequence.
+So let's look at this as a diagram.
+Imagine that this is our sequence, and we
+have a few different objects in our sequence here-- triangles, squares,
+and circles, in this example.
+The first, fundamental aspect to understand about sequences
+is that indexing starts at 0.
+So if we call this sequence "s", we would
+access the first element in our sequence by typing "s"
+and, in brackets, putting its location, which is 0.
+This object here in the second position would be addressed and accessed
+as s[1], and so on.
+This would be s 2, 3, and 4.
+Another way to access objects within the sequence
+is not to count from left to right, but from right to left.
+So we can access sequences either by giving a positive index, which
+is counting a location from the left to right,
+or we can use a negative index, which is counting positions from right to left.
+In that case, we have to use the negative 1 for the very
+last object in our sequence.
+Correspondingly, minus 2 would correspond
+to the second to last object, and so on.
+Sequences also support an operation called "slicing."
+So let's take a look at that now.
+If we, again, have our sequence "s". To access
+a specific unit, specific object, we would just
+use the location-- for example, 2, in this case.
+However, if we wanted to extract multiple objects in the sequence,
+we can do the following.
+We can say s bracket, say, 0, 2.
+This first index, the first position is the start position,
+and the second position here is to stop position.
+Python slices stop before Python reaches the element at the stop location.
+This means that if you type "s", and, in brackets, "0 column 2",
+Python is going to return a slice to which
+consists of the objects in locations 0 and 1,
+but it will not return to you the object at location 2.
+
+1.2.2: Lists
+Lists are mutable sequences of objects of any type.
+And they're typically used to store homogeneous items.
+Lists are one type of sequence, just like strings
+but they do have their differences.
+If we compare a string and a list, one difference
+is that strings are sequences of individual characters,
+whereas lists are sequences of any type of Python objects.
+Another difference between strings and lists
+is that strings are immutable, whereas lists are mutable.
+In addition to these two differences, strings and lists, of course,
+come with their own methods.
+It is common practice for a list to hold objects of just one type,
+although this is not strictly a requirement.
+Let's try a couple of simple lists to experiment with them.
+Let's construct a simple list of numbers to learn a little bit more about lists.
+So I'm going to construct a list of numbers.
+I'm going to call it numbers.
+And I'll use numbers 2, 4, 6, and 8.
+Imagine I wanted to extract, or access, the first element of my list.
+The first thing for me to do is type the name of the list,
+then I need my square brackets.
+Now remember, in Python, indexes start at zero.
+So for me to be able to look at the first element of that list,
+I need to put in index 0, position 0.
+Here, Python tells me that the first object, meaning the object located
+at position 0, is number 2.
+If I change the index to 1, Python gives me the second object.
+Now if I wanted to find out what is the very last object on my list,
+I can count positions from right to left.
+And that means I have to use negative indices.
+So if I type numbers minus 1, Python tells me the very last element
+of my list is the number 8.
+Remember, because lists are mutable sequences, we can modify their content
+and after we've created them.
+Let's try appending a new number, a number 10, to the end of our list.
+To do that, the first thing I type is numbers, then I need my dot,
+and I type append.
+And inside the parentheses, I put in the number 10.
+If I now ask Python to show the content of the list,
+I'll see that number 10 has been appended to that list.
+Another operation we commonly would like to do
+is to concatenate two or more lists together.
+Now consider a situation where I have another list.
+Let's just call that x.
+And let's say the new list has numbers 12, 14, and 16.
+In Python, I can use the plus sign as long as both objects are
+lists to concatenate them.
+So I can type numbers plus x.
+And you see that the result is another list.
+I can check that by asking, what is the type of the object
+that Python most recently outputted?
+And that's a list.
+So when I type a list plus another list, I'm
+concatenating these two lists together.
+Let's now look at a couple of list methods in a little bit more detail.
+In this situation, we have a numbers list.
+And what I would like to do is, I would like
+to reverse the content of the list.
+So I would like to have my last object first, second to last object second,
+and so on.
+In this case, I can use the reverse method.
+So I can type numbers, and I can call the reverse method.
+But see, Python doesn't return any object to me.
+This is because list methods are what are called in-place methods.
+They modify the original list.
+To see that, I can now type numbers, and I can see that the numbers on the list
+have been reversed.
+So this is what happens.
+If we have a list here - we have our numbers 1, 3, and so on.
+Our last number is 23.
+What the reverse method does is the following:
+It operates on the list that I have, meaning the original list.
+It moves the last object first and the first object last.
+Then it takes the second to last object, moves that to the second position,
+and so on.
+So the consequence is that the ordering of the objects in the list
+will have been reversed by the end.
+Let's then a look at the sort method.
+Consider a list called names where we have four names, Zofia, Alex,
+Morgan, and Anthony.
+One of the list methods is called the sort method.
+If I type names.sort and place parentheses at the end of sort,
+I can sort the contents of this list.
+If I now type names, you'll see that names have been
+sorted to be in alphabetical order.
+So the new ordering of objects in the list
+is Alex, Anthony, Morgan, and Zofia.
+Now there is another function in Python which is called "sorted".
+And the way that function operates is a little bit different.
+When we're using the list method sort, we're taking the existing list
+and reordering the objects within that list.
+If we're using the sorted function, we're
+actually asking Python to construct a completely new list.
+It will construct this new list using the objects
+in the previous list in such a way that the objects in the new list
+will appear in a sorted order.
+So let's see how this happens.
+Let me take my names list, and let me just reverse that.
+And to confirm what has happened, now the ordering
+has been flipped as we would expect.
+I can then say something like sorted_names,
+which would be a new object.
+I use the sorted function and I apply it to my list names.
+Now if I see what is the content of names,
+you see that nothing has happened.
+That's because I haven't called any list method.
+But if I look at the contents of sorted_names,
+you'll see that it has the same exact objects as the original list names,
+but in this case, they have been alphabetically sorted.
+Finally, if you wanted to find out how many objects our list contains,
+we can use a generic sequence function, len.
+So we can type len(names), and Python tells us
+that our list contains four objects.
+
+1.2.3: Tuples
+Tuples are immutable sequences typically used to store heterogeneous data.
+The best way to view tuples is as a single object that
+consists of several different parts.
+Tuples have many uses in Python programming.
+One especially important use case is when you want to return more than one
+object from your Python function.
+In that case, you would typically wrap all of those objects
+within a single tuple object, and then return that tuple.
+Let's now take a look at some of the basic operations
+that we can do using tuples.
+I'm first going to construct a tuple.
+I'm going to just call it capital T. And let's just
+put in a few numbers in my tuple.
+Let's say 1, 3, 5, and 7.
+Again, tuples are a type of sequence.
+So if I wanted to know how many objects I have in my tuple,
+I can use the len function.
+I can also concatenate tuples.
+So I can do something like T plus.
+I need a new tuple here.
+Let's say 9 and 11.
+And in this case, Python returns a new tuple to me
+where the two tuples have been put together.
+Because tuples are sequences, the way you access different objects
+within a tuple is by their position.
+So if I wanted to access the second object in my tuple,
+I would type capital T, square bracket, and 1.
+And remember, using position 1 is going to give me
+the second object in the tuple, because indices in Python start at 0.
+Another operation that you need to be familiar with
+is how to pack and unpack tuples.
+Imagine I have two numbers-- two variables, x and y.
+Let's just quickly create them.
+Let's say x is equal to this.
+y is equal to this.
+Imagine now if I wanted to construct a tuple object.
+We could think of these two numbers x and y as coordinates.
+So I could do something like this.
+I could define my coordinate as a tuple, which consists of two objects, x and y.
+If I now ask Python, what is the type of my coordinate object,
+Python will tell me that's a tuple.
+This operation is called packing a tuple, or tuple packing.
+Another related operation is how you unpack a tuple.
+Our coordinate contains two numbers.
+Our coordinate object is a tuple.
+Here is how you can unpack this tuple.
+Let's say I would like to unpack that into two numbers--
+say c1 and c2, perhaps short for coordinate 1 and coordinate 2.
+I can just write c2 and c2 as a tuple.
+And then I can assign coordinate into that tuple.
+If I now look at the values of c1 and c2, I will observe the following.
+c1 contains the first object in that tuple.
+Where c2 contains the second object of the tuple.
+We can also use tuples in FOR loops, which is extremely handy.
+Let's say I've created multiple coordinates.
+So in this case, my object coordinates is
+a list which consists of tuples where each tuple consists of two numbers.
+What if I wanted to loop over these objects in say a FOR loop?
+Then I can do the following.
+I can call these coordinate pairs x and y.
+Let me enclose these in parentheses here, in coordinates.
+And I can ask Python to print the value of x and y.
+So this is what's happening here.
+Coordinates is a list of tuples.
+In my FOR loop I am going over that container, that sequence
+of coordinates, one at a time.
+The key part to focus here is how I unpack the tuples
+from my list of tuples.
+So the syntax is 4x comma y in coordinates.
+In other words, I'm unpacking the tuples within the coordinates list
+one at a time.
+One more thing about unpacking tuples in a loop.
+I don't necessarily need the parentheses surrounding x and y.
+So I can also just type for x comma y in coordinates.
+And then I just have the same print function.
+This also works.
+However, sometimes having the extra parentheses around the tuple
+will make it clearer to you that you are dealing with a tuple object.
+It's relatively easy to understand how to construct and deal with tuples
+that contain multiple objects.
+But what if you just have one object within your tuple?
+Let's experiment with that first.
+Let's start with a tuple where we have two objects, say 2 and 3.
+We know this is a tuple from the way we constructed.
+We can also ask Python to return to us the type of the object, which we now
+happen to call c.
+If I wanted to construct a new tuple with just one object in it,
+you might guess that we could just use the following structure.
+We could just type c is equal to parentheses.
+And we put the one number in there.
+However, if we ask Python now, what is the type of this object?
+It's not actually a tuple.
+If we check the type of this object by typing type parentheses c,
+Python is telling us that c is actually an integer.
+But this is not what we wanted.
+We wanted to have a tuple object that contains just one object.
+This is where the syntax is a little bit counterintuitive.
+To construct a tuple with just one object,
+we have to use the following syntax.
+We start by saying c is equal to.
+We put our tuple parentheses.
+We put it in our number 2.
+And we add the comma.
+When we now ask Python what type of object is c,
+we know that this is a tuple.
+Finally, if you want, you can also omit the parentheses.
+This also works.
+But the code is not quite as clear.
+That's why I recommend using parentheses whenever you're using a tuple.
+
+1.2.4: Ranges
+Ranges are immutable sequences of integers,
+and they are commonly used in for loops.
+To create a range object, we type "range"
+and then we put in the stopping value of the range.
+Now, we've just created a range object, but this is less helpful
+if you would like to see what's the actual content of that object.
+Although, we wouldn't typically do this in a Python program,
+for us to really see the content of that range object,
+so what we can do in this case is we can turn it into a list.
+So if we say "list of range 5," we'll see that the range object consists
+of five numbers, from 0 to 4.
+The input argument to range is the stopping value.
+And remember, Python stops before it hits the stopping value.
+That's why range 5 does actually not contain the number 5.
+We can provide additional arguments to the range function.
+For example, we can provide the starting point,
+and we can also define the step size.
+So if we type "range 1 to 6," in that case,
+we get a range object which starts at 1 and ends at 5.
+If we wanted to go in increments of two, we could do something like this.
+We could start from 1, go up to 13-- number 13,
+not itself included-- and we could go in steps of two.
+In this case, we get a range object that starts at 1 and ends at 11.
+Typically when we use range objects in our Python programs,
+we do not first turn them into lists.
+We've done it here only so that it's easier for us
+to understand what these objects do.
+You can certainly use a list object in a for loop context,
+but it's problematic for the following reason.
+To store a range object, Python is only storing three different numbers,
+which are the starting number, the stopping number, and its step size.
+If you have a very large dataset that contains, say, 10 million objects,
+if you first create a list that contains the indices for accessing
+these 10 million numbers, you've just wasted a lot of space just
+to be able to loop through your data.
+Consequently, use range objects as is.
+Don't turn them into lists before using them.
+
+1.2.5: Strings
+Strings are immutable sequences of characters.
+In Python, you can enclose strings in either single quotes,
+in quotation marks, or in triple quotes.
+Let's look at a couple of common sequence operations on strings.
+Let me first define a string.
+Let's just go with "Python."
+Again, if I wanted to find out how long is my string,
+I can use the len function.
+Or if I wanted to access say the first or the last element of that string,
+I can use my common generic sequence operations.
+I can also do slicing.
+So I might want to start from the very beginning of the string
+and take the first three objects.
+In that case, I specify the starting point of the slice
+and the end point of the slice.
+So in this case, I get the letters "Pyt."
+So Python returns a new string to me.
+I can also do slicing using negative indices.
+So for example, if I type S, minus 3, Python
+will give me the last three characters in that sequence,
+in that string, which are h, o, and n.
+I can also test for memberships using the strings.
+For example, imagine I wanted to ask, is the character y part of my string?
+So I can type in my y, and I can ask, is y in S?
+And the answer is going to be True.
+If I use capital Y, the answer is going to be False.
+Strings are a good place to talk about polymorphism.
+Remember, polymorphism means that what an operator does
+depends on the type of objects it is being applied to.
+This is just like in mathematics, where you have to define addition separately
+for numbers as opposed to matrices or some other object.
+In Python, we can add two numbers together by using the plus sign.
+So for example, I can just ask Python, what is 12 plus 12?
+I can also add two strings together.
+In that case, the operation is not called addition, but concatenation.
+So let's have one string here, "hello."
+We can add that to another string.
+And actually what Python does is the following:
+It takes my first string, it takes the second string,
+and it concatenates those two strings together.
+The result is a new string where the previous two
+strings have been put together.
+Let's think about the multiplication operation first with numbers.
+Say, in mathematics, if we say something like 3 times 5, what we really mean
+is 5 plus 5 plus 5, which would be 15.
+If we have a string in Python-- let's called that S--
+and if we type something like three times S,
+Python will turn this into S plus S plus S.
+A plus sign between two numbers means addition,
+whereas a plus sign between two strings means concatenation.
+Therefore to say three times S, where S is a string object,
+makes perfect sense in Python.
+Let's try this out.
+Let's define a string object S. Let's just go with "Python".
+If I type 3 times S, Python is going to take that string
+and concatenate with itself.
+So the result is "PythonPythonPython", a new string.
+In the examples that we looked at here, we
+were applying a plus sign between two objects that
+were either a number and a number or a string and a string.
+In order for polymorphism to work, these two objects
+have to be of the same type.
+So while it makes sense to add a number to a number and a string to string,
+it does not make sense to add a string to a number or vice versa.
+Let's look at this through an example.
+Let's try to concatenate a string and a number.
+So first, I need my string.
+I'm going to have something like "eight equals"-- and I'll try to add a number,
+let's say 8.
+The reason this does not work is because the first object is a string
+and the second object is a number.
+For me to be able to run this line, what I need to do first
+is to take the number 8 and turn that into a string.
+I can explicitly turn a number to a string by using the str function.
+In this case, I have two strings, so saying a string plus a string
+makes sense.
+And the result works out.
+The operations we have seen for string so far
+have really all been generic sequence operations.
+In addition to these operations, strings also
+have their own methods that enable you to manipulate strings.
+To get a directory of all attributes, I type dir, str for strings,
+and Python gives me a long list of different attributes
+that are available for strings.
+Let's see what type of help is available to us right here.
+For example, the string function "replace" looks interesting to me,
+so I can just type str replace, and I can enter a question mark at the end.
+This gives me a very brief description of the string replace method.
+So let's use the replace method through an example.
+I'm going to define a string,
+let's call it "name".
+I'm going to use "Tina Fey" here as my string
+and we'd like to replace the first capital T with a lower case t.
+I call the replace method,
+and I'd like to replace the capital T with a lower case t.
+Because strings are immutable objects, Python
+doesn't actually modify your string.
+Instead what it does -- it returns a new string to you.
+If I'd like to keep this new string, I have to assign it to some variable.
+So for example, I could call this "new_name",
+which consists of the original name with the letter T replaced.
+If I now look at the content of my original name,
+you'll see that the T remains capitalized.
+But if I ask, what is my new name?
+The capital T now appears as a lowercase t.
+Let's continue with our example.
+But this time, let's try the split method.
+The split method takes a string and breaks that down into substrings.
+What you have to specify is the character
+you would like to use for splitting the string.
+I can also take these strings and turn them
+into lowercase or uppercase letters using other string methods.
+Let's find out the type of this object --
+it's a list.
+Therefore we can ask how many objects are contained within that list.
+And Python tells us we have two objects there.
+Because it's a list, we can access individual objects by their position
+so it makes sense to write names square brackets 0, or names square bracket 1.
+We can also do the following: 121 00:07:59,980 --> 00:08:03,870 We can extract the first object in that list,
+and we can ask what is the type of that object.
+Now that we know it's a string, we can call some string methods
+to modify that name.
+So let's take that string -- names square brackets 0,
+and let's call the upper method.
+This turns the name "Tina" into all uppercase.
+We could similarly take, let's say, the string at location 1,
+and turn that into a lowercase case string using the lower method.
+
+1.2.6: Sets
+Sets are unordered collections of distinct hashable objects.
+But what does it mean for an object to be hashable?
+That's a more technical topic, and we will not go into details here.
+In practice, what that means is you can use sets for immutable objects
+like numbers and strings, but not for mutable objects
+like lists and dictionaries.
+There are two types of sets.
+One type of set is called just "a set".
+And the other type of set is called "a frozen set".
+The difference between these two is that a frozen set is not mutable
+once it has been created.
+In other words, it's immutable.
+In contrast, your usual, normal set is mutable.
+You can think of a set as an unordered collection of objects.
+One of the key ideas about sets is that they cannot be indexed.
+So the objects inside sets don't have locations.
+Another key feature about sets is that the elements can never be duplicated.
+So if you have a given element or object in your set, say number 3,
+if you try adding that number again in the set, nothing happens.
+This means that all of the objects inside a set
+are always going to be unique or distinct.
+Python sets are especially useful for keeping track of distinct objects
+and doing mathematical set operations like unions, intersections, and set
+differences.
+Let's next experiment with using sets.
+Let me start by creating an empty set.
+I'm going to create an object, a set that I'm going to call ids.
+And the idea is that this would contain distinct ids
+in my study or my data set.
+I can create an empty set by just using the key word set,
+and just following that with a set of parenthesis.
+In this case, I would have created a set called ids, and it would be empty.
+It would have no objects in it.
+Let's say that I want to do something a little different.
+I'd like to create a set that has a few members in it.
+And in this case, the syntax is very similar.
+I use the keyword set, followed by parentheses.
+And inside the parenthesis, I insert a list.
+Let's say that the numbers or the ids of our subjects
+are the following-- 1, 2, 4, 6, 7, 8, and 9.
+And this is my initial set.
+If I wanted to ask how many members do I have in this set,
+I can use the len function.
+And Python tells me that I have seven objects in this set.
+Let's say I wanted to add one more id to this set.
+Let's call that id number 10.
+So I would type ids.add, and I am adding an object
+with an id number 10 to my set.
+If I type ids, Python tells me that these
+are the current members of the set.
+And id number 10 has been added to this set.
+If I try adding, let's say, number 2, which I already have in my set,
+and then I ask what other members of the set now,
+you'll see that nothing has happened.
+And this is one of the key features of set.
+In other words, if you already have an object in the set,
+and if you try adding that same object again, nothing happens.
+We can remove members or objects from sets using the pop function.
+In that case, Python returns to you an arbitrary member of that set.
+So I can run this a couple of times.
+If I look at the contents of my set, I can see now
+that I have five objects remaining in my set.
+Let me redefine my ids set.
+Let's say that it consists of individuals
+with ids ranging from 0 to 9.
+I can look at the contents and this looks correct.
+Imagine that some of these objects are males and females.
+So I'm going to construct a set that I'm going to call males.
+So it's a set.
+I need to build that as a list.
+And let's say that these are the ids of the males.
+A very useful property of sets is that we can use them
+from a mathematical set operations.
+I can now use the set males to define a new set that I'm going to call females.
+So I'm going to define females as all of the ids minus males.
+If I ask Python what is the type of females, Python is telling me
+it's a set.
+I can look at the contents of that set.
+I can also look at the contents of my males set.
+And I see that these two are distinct.
+There are other ways to perform set operations in Python.
+For example, I can perform the set union operation in a very handy way.
+Let's say that I want to create a set which I'm going to call everyone.
+And everyone consists of all of the males and all of the females.
+The short hand operation for a set union in Python is a vertical line.
+Again if I look at the contents of the set everyone,
+I can see that all of the set members are there.
+Finally, I can take an intersection of two sets using the ampersand operation.
+Let's say I want to take everyone, and I wanted to take out another set.
+So this is performing at the intersection operation.
+I can define another set, which in this case consists of the ids 1, 2, and 3.
+And then I can ask Python to return everybody
+who is in the intersection of these two sets--
+one set containing members 1, 2, and 3 and the other one containing everybody.
+And in this case, the answer is the set that consists of the ids 1, 2, and 3.
+As a simple application of sets, let's use
+sets to count the number of unique letters in a word.
+So let me first define my word of interest.
+Let's go with something a little more complicated,
+something like anitdisestablishmentarianism.
+I spelt that right.
+Now what I can do next is I can construct a set, so I just say set.
+I construct that from my string which is called "word".
+And I'm going to call this "letters".
+To find out how many unique letters I have in this word,
+I just ask Python to return the length of the letters object, which is 12.
+So in this case, we were able to use the set
+object to simply count the number of unique letters in a string.
+
+1.2.7: Dictionaries
+Dictionaries are mappings from key objects to value objects.
+Dictionaries consists of Key:Value pairs, where the keys must be immutable
+and the values can be anything.
+Dictionaries themselves are mutable so this
+means once you create your dictionary, you can modify its contents on the fly.
+Dictionaries can be used for performing very fast look-ups on unordered data.
+A key aspect to be aware about regarding dictionaries
+is that they are not sequences, and therefore do not
+maintain any type of left-right order.
+This means that if you're looping over a dictionary,
+the Key:Value pairs will be iterated over in arbitrary order.
+Let's look at a diagram to clarify this idea.
+We're going to set up a simple dictionary where
+we have our first key that's associated with a value object.
+We have our second key that goes with another object.
+And let's say we have key number four here which goes
+with the corresponding value object.
+If this is a dictionary, this key object will always
+be associated with this value object.
+Similarly, this key will always go with this value object.
+When we say that dictionaries don't maintain
+any type of left or right order, what we're saying
+is that the ordering of these key-value pairs themselves is not defined.
+That means if I'm looping over these pairs,
+I might first get the pair that corresponds to my second key here.
+Let's then look at some uses of dictionaries.
+I would like to set up a dictionary which is called age.
+And if I want this to be an empty dictionary,
+I have two ways to construct that.
+The first approach is just to use a pair of curly braces,
+and this would give me a dictionary age which would
+be empty at the time of construction.
+Another possibility is to type "age = dict",
+which is a key word, open and close parentheses.
+And again I have created an empty dictionary.
+Let's then construct a dictionary that consists of names and ages.
+In this particular dictionary, the names are going to be the keys
+and the ages are going to be the value objects.
+Imagine the first task we'd like to do is look up a person's age.
+We do this using the following syntax.
+We first type the name of the dictionary.
+We then follow with the square brackets.
+Inside the square brackets, we insert the key we're interested in looking up.
+Let's say, in this case, we'd like to know, how old is Pam?
+So we'd enter "Pam" inside the square brackets.
+And Python returns the result to us.
+Often, we'd like to modify the value objects that
+are associated with specific keys.
+Let's say we would like to increase the age of Tim by one year.
+Here is how we could do this.
+We first take our age dictionary.
+We'd like to modify Tim.
+And let's say we want to increase his age by one year.
+We could use the following kind of syntax.
+We could say age of Tim is equal to age of Tim plus 1.
+And this certainly works.
+However incrementing the value of an object by one, or by some other number,
+is a very common operation.
+And there's a very handy shorthand notation for doing that in Python.
+So let's take the age of Tim,
+and say we would like to increase that by one year,
+we can do the following:
+We can just type "+= 1".
+And what happens if we check the age of Tim,
+we will have increased Tim age again by one year.
+Let's make sure we understand what happens when we say plus equals.
+When you're reading code from left to right,
+the plus operation happens first.
+Then we have the equal sign, which means assignment.
+So when we say something plus equals 1, for example, we first
+take the value of the object, we add one to that object,
+and then we reassign it back to the original object.
+A common mistake is sometimes to mix up the order of these two operations.
+Think about what happens if you say x equals plus 1.
+You're not incrementing the value of x by 1.
+Instead, you're saying that x should be assigned
+the value of plus 1, which is just the same thing as saying x is equal to 1.
+If you wish to increment the value of a variable by 1,
+you first do it the incrementation and then the assignment.
+That's why the order of these two operations is plus and then equals.
+You can use the dictionary method keys to find out what
+are all the keys in the dictionary.
+And similarly, you can use the values method
+to find out what are all of the values in the dictionary.
+When you call these methods, Python returns to you
+an object which has a very special type.
+The type of the returned object is what's called a "view object".
+View objects do precisely what you might imagine that they do.
+They provide a dynamic view of the keys or values in the dictionary.
+A key point here is that as you update or modify your dictionary,
+the views will also change correspondingly.
+Let's now work with the dictionary that we just defined.
+We're going to first extract all of the names in the dictionary.
+So I'll do that by saying "names = age.keys".
+Now let's just check the type of the object names.
+And Python confirms that this is a dictionary keys object.
+Let's say I would like to add a new key to my dictionary.
+Let's add a person called Tom who is 50 in our dictionary.
+So we say age["Tom"]
+and we assign the value object 50 to that key.
+If we now ask, what are the names, you'll
+see that the view object also contains Tom.
+We didn't redefine the content of names,
+and this is the nature of view object.
+As we modify the dictionary, the content of the view object
+will change automatically.
+Let's look at the values method.
+So if we say age.values, Python returns to us
+all of the values in the dictionary.
+I'm going to call this ages,
+and we can look at that object.
+So in this case, we have one, two, three, four,
+five different ages contained in the dictionary.
+I'm going to add one more person to the dictionary.
+Let's call that person Nick,
+and let's say Nick is 31 years old.
+If I now ask Python, what are the names, you'll
+see that the name Nick is also contained in the names object.
+This is the nature of views objects--
+their content is dynamically updated as you modify your dictionary.
+Finally, let's see how we'll test for membership in a dictionary.
+We know that we have a key Tom in our dictionary.
+If I want to ask if Tom is a member of our dictionary,
+if Tom is a key in our dictionary, I can ask, "Tom" in age?
+And the answer is going to be "True".
+If I ask, is "Zofia" in our dictionary?
+Python is going to say "False".
+This is how we test for object membership in a dictionary.

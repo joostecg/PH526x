@@ -1,0 +1,805 @@
+1.3.1: Dynamic Typing
+
+We're going to talk about type checking, but let's first talk about types.
+What does a type mean the context of a computer?
+So if we take a look at a computer's memory,
+instead of strings or numbers or dictionaries,
+all we have is a sequence of zeroes and ones.
+And the question is, how should a program interpret
+these sequences of zeros and ones?
+What a type does is two things.
+First, it tells a program, you should be reading these sequences
+in chunks of, let's say, 32 bits.
+So that's the first thing.
+The second thing that it tells computer is, what does this number
+here, this sequence of bits, represent?
+Does it represent a floating-point number, or a character,
+or a piece of music, or something else?
+If you move data from one variable to another,
+if the types of these variables do not match,
+you could potentially lose information.
+So for example, if your program expects a floating-point number,
+but you provide it with an integer, there
+is no problem, since integers are a subset of floating point numbers.
+However, if the program expects an integer,
+and you provide it with a floating point number,
+some information is likely lost.
+Typing or assigning data types refers to the set of rules
+that the language uses to ensure that the part of the program receiving
+the data knows how to correctly interpret that data.
+Some languages are statically typed, like C or C++,
+and other languages are dynamically typed, like Python.
+So what do these two terms mean?
+Static typing means that type checking is performed during compile time,
+whereas dynamic typing means that type checking is performed at run time.
+Consider the following simple example.
+If we tell Python x is equal to 3, how does Python
+know that x should stand for an integer?
+There are three important concepts here-- variable, object, and reference.
+So when you assign variables to objects in Python,
+the following three things happen.
+First, if we type x equals 3, the first thing Python will do
+is create the object, in this case, number 3.
+The second thing Python will do is it will create the variable name, x.
+And the third thing is Python will insert a reference from the name
+of the variable to the actual object.
+Variable names and objects are stored in different parts of computer's memory.
+A key point to remember here is that variable names always link
+to objects, never to other variables.
+A variable is, therefore, a reference to the given object.
+In other words, a name is possibly one out of many names
+that are attached to that object.
+When assigning objects, it's useful to keep in mind the distinction
+between mutable and immutable objects.
+Remember, mutable objects, like lists and dictionaries,
+can be modified at any point of program execution.
+In contrast, immutable objects, like numbers and strings,
+cannot be altered after they've been created in the program.
+To illustrate dynamic typing, I've written down here three lines of code--
+x is equal to 3, y is equal to x, and finally, y is equal to y minus 1.
+Let's work through these three lines of code.
+When we're first asking Python to run the first line, x is equal to 3,
+remember the following steps take place.
+Python first creates the object, 3, then it creates the variable name, x,
+and, finally it inserts reference from the variable name to the object itself.
+When we go and look at the second line, y
+is equal to x. The object x, in this case number 3, already exists.
+The next step Python does is it creates a new variable name, which
+is equal to y, and then it inserts a reference to the object
+that x, variable name x, is currently referencing.
+Remember, a variable cannot reference another variable.
+A variable can only reference an object.
+We then will want the third line, which is y equals y minus 1.
+Python first looks at the object here, which is our number 3.
+But we know that numbers are immutable.
+Therefore, in order to do the subtraction,
+a new object has to be created, which in this case is the number 2.
+We already have the variable name y in our computer's memory.
+So the final thing Python does is, it removes this reference
+and inserts a reference from y to the object 2.
+So once we've run all the these three lines of code,
+x will eventually be equal to 3 and y will be equal to 2.
+Let's then look at dynamic typing for mutable objects.
+The behavior for mutable objects, like lists and dictionaries,
+looks different, although it really follows the same logic
+as for immutable objects.
+To illustrate the concepts, I've written down three lines of code.
+Let's start from the first one, L1 is equal to a list which
+consists of the numbers 2, 3, and 4.
+Let's think about what happens as this line is run.
+First, Python creates the object-- list 2, 3, 4.
+The second step, Python creates the variable name L1.
+And third, because of the assignment, L1 will reference this list.
+If we look at the second step, L2 is equal to L1,
+the object L1 which currently references the list already exists.
+Therefore, Python only needs to do two things.
+The first thing is it creates the variable name L2.
+Because L2 cannot reference L1, which is another variable,
+it must reference the object that L1 references.
+Therefore, L2 essentially becomes a synonym for the very same object.
+When we look at the third line, L1 application 0 equals 24.
+In this case, what happens is we are using the name
+L1 to reference this object, and we're modifying
+the content of the number at location 0 from 2 to 24.
+After this modification, the content of the list is going to be 24, 3, and 4.
+By looking at the code here, your first impression
+might have been that you have two lists, L1 and L2,
+and only list L1 gets modified.
+However, if you understand how dynamic typing works in Python,
+you have realized that we only have two names that
+reference the very same object.
+The last line, L1 at location 0 equals 24
+would have been identical to typing L2 at location 0 equals 24.
+This is again for the reason that both of these variable names, L1 and L2,
+reference the very same object.
+Each object in Python has a type, value, and an identity.
+Mutable objects in Python can be identical in content
+and yet be actually different objects.
+Let's illustrate this point with a simple example.
+I'm going to define a list L which has the elements 1, 2, and 3.
+And I'm also going to find another list, which I'm going to call M,
+and it also has the elements 1, 2, and 3.
+I can compare these lists using two equal signs.
+So I am asking, is L equal to M?
+When we're comparing two lists, the actual comparison
+is carried out element-wise.
+So this 0-th element in L is compared with the 0-th element of M,
+and so forth.
+In this case, the content of these two lists is identical.
+Therefore, when I ask, is L equal to M, Python returns "True".
+But there is another way how we can compare these two objects.
+We can also ask, is L the same object as M?
+And in this case, Python returns "False".
+What's happening here?
+We can use the id function to obtain the identity of an object.
+And the number returned by Python corresponds to the object's location
+in memory.
+So if I type id of L, Python returns a number.
+If I type id of M, Python returns another number.
+You can think of these numbers as some type of social security
+numbers for these different objects.
+So typing L is M is really the same as typing,
+is the identity of L equal to the identity of M?
+The main point here is that mutable objects can be identical in content,
+yet be different objects.
+Consider a situation where we have defined a list, L, again
+consisting of the numbers 1, 2, and 3.
+What if I wanted to create a copy of that list?
+Remember, if I type M is equal to L, in that case
+M is just another name for the same list, L.
+But what if I wanted to create a completely new object that
+has identical content to L?
+The easiest way to do this is the following.
+I can ask Python to create a new list, and then assign
+that list object to a new variable.
+This is the syntax.
+I already have my list object, L, in the computer's memory.
+By typing list parentheses L, Python will
+create a completely new object for me
+but the content of that list is going to be identical to the content of list L.
+In this case, if I ask, M is L, I get a false.
+That's because these two objects are distinct.
+But if I ask, is M equal to L in content,
+the answer is going to be true.
+Another way to create a copy of a list is to use the slicing syntax.
+So I could have said something like, M is equal to L, putting square brackets,
+and taking every single element from the list L.
+This results in the creation of a new list object which is then
+assigned to the variable name M.
+
+1.3.2: Copies
+For more complex structures, Python provides
+the copy module, which you can use for creating identical copies of object.
+There are two types of copies that are available.
+A shallow copy constructs a new compound object
+and then insert its references into it to the original object.
+In contrast, a deep copy constructs a new compound object and then
+recursively inserts copies into it of the original objects.
+Let's clarify this with a diagram.
+Let's think about a situation where we have an object x,
+and we have references to other objects embedded in our object x.
+I'm going to call these objects a and b.
+If we construct a shallow copy, this is what happens.
+A copy of the object x is going to be created.
+Let's called is x prime.
+But then we will insert references in x to the original objects a and b.
+We call this type of copy a shallow copy of x.
+Let's then think about what happens if we have a deep copy.
+We will create a copy of x.
+Let's call that x prime prime.
+And now we will also create copies of a and b.
+I'm going to call these a prime prime and b prime prime.
+These are their own objects.
+And into my new copy of x, I'm going to insert references
+to the copies of a and b.
+This object is called a deep copy of the object x.
+
+1.3.3: Statements
+Statements are used to compute values, assign values, and modify attributes,
+among many other things.
+Here are three examples of more specialized statements.
+The return statement is used to return values from a function.
+Another example is the import statement, which is used to import modules.
+And we have seen examples of this statement before.
+Finally, the pass statement is used to do nothing
+in situations where we need a placeholder for syntactical reasons.
+Let's then talk about compound statements.
+Compound statements contain groups of other statements,
+and they affect or control the execution of those other statements in some way.
+Compound statements typically span multiple lines.
+A compound statement consists of one or more clauses,
+where a clause consist of a header and a block or a suite of code.
+The close headers of a particular compound statement
+start with a keyword, end with a colon, and are
+all at the same indentation level.
+A block or a suite of code of each clause,
+however, must be indented to indicate that it forms a group of statements
+that logically fall under that header.
+There are no hard and fast rules about indentation
+as long as you are consistent.
+Using a tab or using four spaces are probably the most common choices.
+Whatever you choose, stick to it.
+Here's an example of compound statement with one clause.
+Line 1 here is the header line.
+And lines 2 and 3 form the block of code.
+Let's look at this compound statement in a little bit more detail.
+On line 1, we first ask, if x is greater than y followed by a colon.
+If this is true, if x really is greater than y,
+then Python will run lines 2 and 3.
+On line 2, we're calculating the difference as x minus y.
+And on line 3, we are printing out the message, x is greater than y.
+Regardless of what happens with the comparison,
+line 4 will always get printed.
+In most programming languages, indentation is not compulsory.
+A key point to realize here is that in Python, indentation
+is not just cosmetic.
+The way you indent your programs determines the logical structure
+of your programs.
+Let's then look at the Python if statement in more detail.
+The if statement selects from among one or more actions,
+and it runs the block of code that's associated with the first if
+or elif test that happens to be true.
+If none of these are true, then it runs the else block.
+In this example, we're interested in computing
+the absolute value between x and y.
+Remember, the absolute value tells us how far
+two numbers are from one another.
+On line 1, we ask first, if x is greater than y?
+If that is true, on line 2, we will assign absolute value as x minus y.
+If the if statement on line 1 fails, we'll next look at line 3.
+There we're asking, if y happens to be greater than x?
+If that's true, on line 4, we will define absval as y minus x.
+If that's also not true, then Python will proceed
+to line 5, which is the else statement.
+In that case, we will define absval as being equal to 0 on line 6.
+If it turns out that x is greater than y on line 1,
+the other conditions will not even be evaluated.
+Remember, Python goes through these different conditions
+in if and elif clauses until it finds the first statement that is true.
+If all else fails, Python will then execute the else statement.
+If you ever actually wanted to calculate absolute values,
+you could use the built-in abs function.
+In this case, we have chosen this example
+just to demonstrate how the if statement works.
+
+1.3.4: For and While Loops
+The For Loop is a sequence iteration that assigns items in sequence
+to target one at a time and runs the block of code for each item.
+Unless the loop is terminated early with the break statement, the block of code
+is run as many times as there are items in the sequence.
+Let's look at the For Loop using a simple diagram.
+Consider a sequence like this.
+We're going to add a few objects here.
+This is our sequence.
+I'm just going to call that seq.
+If we have a For Loop where we say for target in sequence
+the following thing happens.
+First target is going to point to the object at location 0 in the sequence
+and is going to run the block of code that's connected
+with the for compound statement.
+During the next iteration, target will be pointing to this object
+here in position 1 and so on.
+Finally, at the very end of the loop, target
+will be pointing to the very last object in that sequence
+and then run the block of code.
+Let's practice the use of For Loops in Python.
+Let's first set up a sequence of 10 numbers.
+And we want to be using for to loop over the sequence.
+So I'm going to type for x in range of 10.
+And maybe I'll just want to print out the number
+so I'll just simply type print(x).
+And Python loops over the range sequence and prints out
+the numbers one at a time.
+Let's now try to apply this for a different type of sequence.
+I have previously defined a list called names,
+which consists of six different names.
+What I'd like to do is use a For Loop to iterate over
+all of the names on this list.
+I'm going to say something like for name in names, and let's print out the name.
+So what Python is doing is it's going over my list of names
+and it's printing them out one at a time.
+If you're coming to Python from another language
+you might be tempted to use an index to get out
+the different names from your list.
+So let's try to implement this code in a slightly different way.
+This certainly works.
+I can say something like for i in range length of names.
+So what I'm doing here is I'm asking Python
+to return the length of the names list, then I'm constructing a range object.
+Then I'll type print names and I use i to index a location on my list.
+And this works just the same way.
+What I have done here is I've created a range
+object that goes over all of the index locations of the list names.
+Now this approach certainly works but it's not very Pythonic way to do this.
+What do I mean by that?
+Well, if we think about something like the English language,
+a natural language, you could certainly say Boston is a principle city,
+but that doesn't quite sound right.
+Most people would say Boston is a major city.
+In the same way, people more familiar with Python
+would prefer the first way of constructing
+the For Loop where we say for name in names
+and then simply iterate over the list.
+I have previously constructed a dictionary
+which is called age. In this dictionary, the keys are names of people
+and the values are the ages of these people.
+It's very common to use a For Loop to iterate over all
+of the key value pairs in a dictionary.
+Remember by typing "age.keys", I get a dictionary view object
+which gives me a dynamic view of all of the keys in my dictionary.
+Since dictionaries are accessed by their keys
+it makes sense to use a loop variable that
+somehow conveys what the keys of the dictionary actually stand for.
+In this case, when setting up my For Loop,
+I'm going to call the loop variable name because the keys in my dictionary
+are names.
+And I'm just going to type for a name in age.keys.
+What I can do next is I can print out the key, which is name,
+and the age of the person associated with that key.
+To do that I type age followed by square brackets
+and I put in the key inside the square brackets.
+What happens here is the following:
+Python is first printing out the name of the person
+and then the value object, the age of the person following the key.
+Because looping over a dictionary is such a common operation
+there is actually a shorthand way of doing it.
+I can go back to my previous code where I typed for name in age.keys
+and I can just simply remove the ".keys" part.
+Here I'm left with for name in age.
+If I run this code the output is just the same.
+Remember that in a Python dictionary a given key always
+goes with the associated object.
+However, remember that the key value pairs
+themselves don't follow any particular ordering inside the dictionary.
+In some applications we would like to loop
+over the dictionary keys in some order.
+Perhaps in an alphabetical order.
+I can accomplish that by doing the following.
+Let me go back to my old line for name in age.
+If I would like to sort the keys, I'd first
+extract the keys by saying age.keys, and then I
+used a built-in function sorted to create a new list in which dictionary
+keys have been alphabetically sorted.
+When I run this code I'll see that the keys appear in an alphabetical order.
+Occasionally you may want to loop over your dictionary keys in reverse order.
+To accomplish this we can still use the sorted function,
+but now we have to provide an additional attribute, reverse.
+So I take my previous line of code and I add "reverse=True".
+And when I run the code now, the keys will
+appear in reversed alphabetical order.
+In addition to the For Loop, Python also has a While Loop.
+The Python while is used for repeated execution of code
+as long as a given expression is true.
+The While Loop repeatedly tests the expression.
+If the expression is true, it executes the first block of code.
+If the expression is false, it executes the second block of code if present,
+and then terminates the loop.
+Sometimes there is some confusion about when to use a For Loop
+and when to use a While Loop.
+Here's one way to think about this.
+For a While Loop you're testing some condition some number of times.
+When you enter that loop you don't know how many times exactly
+you'll be running through that loop.
+This is in contrast with For Loops where when beginning the loop,
+you know exactly how many times you would
+like to run through the block of code.
+
+1.3.5: List Comprehensions
+Let's talk about list comprehensions next.
+A common operation in Python is to take an existing list,
+apply some operation to all of the items on the list,
+and then create a new list that contains the results.
+In Python, there is an operator for this task known as a "list comprehension".
+Consider the following approach to computing squares of a list of numbers.
+Here is one approach how you could certainly code this.
+I could set up a list that I can call "squares",
+and I can initially create that as an empty list.
+I can then construct a For Loop where I go over each of my numbers,
+and square that number, and then append the result to my squares list.
+So I could do something like the following:
+I might say for number in numbers, my square
+is going to be equal to my number squared.
+I can then append my squared number to the squares list by saying
+"squares.append(square)".
+If I run this, the output is going to be a list of squares.
+Let's then construct the same list using list comprehensions. I'm
+going to call my new list "squares2".
+I start the list comprehension by using square brackets.
+Consider a situation where I'm already given a number, which
+is stored in a variable called "number". If I had that,
+I could simply square that number, and that would become an item in my list.
+But at this point, number doesn't have any particular value.
+This is where the For Loop comes in.
+I can now write "for number in numbers", and this is my comprehension.
+If I ask Python to print out squares2, you'll
+see that it's identical in content to my squares.
+Why would you want to use a list comprehension in Python?
+There are two primary reasons.
+One is list comprehensions are very fast.
+The second reason is list comprehensions are very elegant.
+You can accomplish a lot in just one line.
+
+1.3.6: Reading and Writing Files
+Let's then look at how to read files in Python.
+I've just created a simple text file which consists of three lines.
+I'm first going to create a variable file name, which
+contains the name of my input file.
+I'm just going to call this "input.txt," which
+is the name of the file I just created.
+We can use for loops to read a file in Python.
+I'm going to type "for line in open()," and, inside open I'm going to insert
+the name of my file.
+What this does is the following:
+open(filename) generates a file object.
+I can loop over file objects using the for statement.
+In this code, line will always contain one of the lines of the input file.
+Let's start with a simple example.
+Let's just print out the lines of the file.
+I'll just type "print(line)" and Python will print out
+the contents of the file.
+We have three lines-- first line, second line, and a third line.
+Let's look at one line of text in a little bit more detail.
+Consider a line of text that just says "first"
+Now, at the end of the line, although you don't see it,
+we always have a line break character.
+So if we have a Python string where line is equal to first,
+although you don't see this character, it's
+going to cause extra line breaks in subsequent processing of your text.
+There is a way to remove this character using the rstrip() method.
+If you call line.rstrip(), Python extracts the line feed character
+and leaves you with the first part of the string.
+Let's try using the rstrip() method for strings.
+The method is called rstrip().
+I can call it by typing "line.rstrip()."
+Remember, strings are immutable.
+That means if I want to keep the result, I
+have to assign it either to a new variable or to the existing variable.
+I'm going to do a re-assignment to line by typing "line=line.restrip()".
+If I now print out line and run the loop,
+you'll see the extra line breaks have disappeared.
+If we look at the code, line.rstrip() returns a string.
+This means that I can just train a new string function at the end of the line.
+I now have line.rstrip().split().
+Inside the split, as an argument, I have to provide the character that I
+want to use for splitting the line.
+In this case, I'm just going to use the whitespace.
+A key thing to realize about this is that the string split
+method returns not a string but a list.
+So let's try to print out the output.
+In this case, Python has read through the entire text file.
+It has split every line, wherever there is a whitespace, and it returns a list.
+Let's then take a look at how to write a text file line by line.
+Let's create the file object by typing "open()".
+First, we need the name of the file, which, in this case,
+is just going to be "output.txt".
+When writing a file, we need a second argument,
+which tells Python that we would like to create a file object for writing,
+not for reading.
+We indicate this by providing that second argument as a string,
+and the content of the string is simply "w".
+What this does is it creates a file object
+for writing to a file named output.txt.
+The next step for us is to capture this file object in some variable.
+Typically, this is called "F."
+At this point, my file object has been opened, and I'm ready to start writing.
+Writing happens by using the method write(),
+which is a method of the file object, in this case called F.
+So I type "F.write()" and I provide the string that I would like to write
+to my text file.
+Let's say we would like to write the word "Python" in our text file.
+We provide the input as a string, in this case "Python."
+However, we have to add an extra character, which
+is the line break character that we extracted
+when we were reading the file.
+Once we are done with writing, we have to close the file object.
+We do that by saying "F.close()"
+and the file has now been closed.
+
+1.3.7: Introduction to Functions
+Functions are devices for grouping statements
+so that they can be easily run more than once in a program.
+Functions maximize code reuse and minimize code redundancy.
+Functions enable dividing larger tasks into smaller chunks, an approach that
+is called procedural decomposition.
+Functions are written using the def statement.
+You can send the result object back to the caller using the return statement.
+Let's define an add function
+so we first type the def keyword.
+Our add function is going to take two input arguments, which are a and b.
+We can calculate a sum by saying-- let's call it mysum.
+Let's define that as a plus b.
+And finally, we use the return statement to return mysum
+to the caller of the function.
+The way I would use this function is as follows.
+I can just type the name of the function.
+Inside parentheses, I have to provide both of the two inputs,
+let's say 12 and 15.
+And Python returns the sum of those two numbers, 27.
+As a general rule, all names created or assigned in a function
+are local of that function and they exist only while the function runs.
+To modify the value of a global variable from inside a function,
+you can use the global statement.
+Arguments to Python functions are matched by position.
+Let's take a look at that, what that means.
+If we define a function, mysum, which has two arguments, a and b.
+Here we would have the code of the function.
+When I call mysum function, perhaps with numbers 2 and 3, the following happens.
+The value 2 inside the function will be represented by the variable "a"
+And the value 3 will be represented by the variable "b".
+You can use tuples to return multiple values from a function.
+Let's see how that works.
+I'm going to define a new function, which is called add_and_sub.
+It's going to take in two different arguments, a and b.
+Inside the function, I will define a sum -- mysum,
+which is the sum of a and b.
+In addition, I'm going to define mydiff, which is a minus b.
+I will then return mysum and mydiff to the caller of the function.
+I do this using a tuple where the first object that I want to return
+is mysum and the second object is going to be mydiff.
+Let's see how I would call this function.
+I'm first going to type the name of the function.
+Let's say my first argument is 20 and the second one is 15.
+Python returns a tuple object where the first number is 35, the sum of the two
+objects, and the second one is number 5, the difference between the two objects.
+Functions do not exist until Python reaches and runs the def statement.
+A function is not executed until the given
+function is called using the function name followed by parentheses syntax.
+The def statement creates an object and assigns it to a name.
+This means that we can later in the code reassign the function
+object to another name.
+We previously defined a function add.
+I can now type newadd and I can set that equal to add.
+I now have two different names for calling the function.
+I can either use add or I can use newadd.
+Here, add and newadd are simply two different names for the same function.
+Arguments are passed by assigning objects to local names.
+Let's see how this works for a mutable object.
+I'm going to define a function called modify, which takes in one argument.
+I'm going to call that mylist.
+Mylist function will look at the first element of the list at location 0
+and it will multiply its value by 10.
+That's all the function does.
+Let me then create a list L with the numbers 1, 3, 5, 7, and 9.
+I'm now going to call my modified function using L as the input argument.
+If I look at the contents of L, I'll see that the first number at location 0
+has be multiplied by 10.
+
+1.3.8: Writing Simple Functions
+Let's try writing a simple function in Python.
+To do this, I've split my screen into two parts.
+At the top, I have my interactive mode.
+And at the bottom, I have my editor mode.
+I've chosen to write the function in the editor,
+because functions that involve more than two or three lines
+are just easier to deal with in the editor mode.
+Let's first define the name of the function,
+and we're going to call this intersect.
+There are two input arguments to the intersect function.
+There are two sequences that I'm going to call s1 and s2.
+The first thing we need to decide is, how are we
+going to keep track of the results that our intersect function generates?
+I'm going to do that in a list, which I'm going to call "res".
+And I've just created res as an empty list.
+What I have to do next is the following:
+I need to loop over all of the members of my sequence as one.
+For any single member in that sequence, I need to ask,
+is this object also a member of the sequence s2?
+If the answer is true, then we would like to retain that list in our result.
+Let's do this piece by piece.
+The first step is looping over all of the objects in my list as one --
+we can do that simply by saying for x in s1, this is our first loop.
+Then we would like to ask, is x also a member of s2?
+To do that, we can test for membership.
+We can ask, if x is in s2 -- now we know that element x is both in s1 and s2.
+That means that it belongs to the intersection of these two lists,
+and therefore, we should capture this result.
+We do that by appending that result to our res list, and we're done.
+The only remaining step is to return the list res
+to whoever is calling this function.
+Let's then try running this function.
+I'm going to run this.
+You can see that Python didn't complain.
+So at least in terms of syntax, things look OK.
+Let's call this function.
+Let's ask, what is the intersection of two lists?
+Let's say that my first list contains the numbers 1, 2, 3, 4, 5.
+And my second one contains the numbers 3, 4 5, 6, and 7.
+Python tells me that the intersection of these two lists
+is another list, which contains the elements 3, 4, and 5.
+Let's then try out a second example.
+Let's try to generate a simple program that generates passwords.
+For this function, we would like to be able to specify the character
+set and the length of the password.
+We're going to call this function password,
+and it's going to take in just one argument.
+The argument is going to be the length of the password.
+Before proceeding with the function, let's think about what
+module if any we may need to import.
+It seems that in this case, we would like
+to be able to choose characters from a sequence of characters.
+This suggests to me that the module random might be handy.
+Remember how random has a method choice which
+enables me to choose one object at random from the sequence
+that you provide as the argument.
+So one possibility is you can choose numbers from a list.
+Another thing that we can do is we can actually provide a string,
+let's say "abcdef" -- and we can ask Python to return one of these characters
+at a time.
+This is going to be the basis for building our function.
+Let's now go back to our password function.
+The first thing we want to define is an empty password.
+We're going to build this password as a string.
+I'm just going to use pw for this.
+And I can create an empty string by typing str followed by parentheses.
+The next step is going to be defining the set of characters
+that will be used as the basis of my password --
+I'm just going to call that characters.
+And initially, let me just define that as "abcdef"
+and we can later extend this list as need be.
+What I'd like to be able do next is to pick one of these characters
+uniformly at random.
+For this, I need a random.choice method.
+If I type random.choice and place the argument characters
+inside the parentheses, I know that this will return
+one of the characters chosen at random.
+What I would like to be able to do is repeat this process multiple times.
+So I would like to be able to sample characters at random one at a time,
+and then construct my password one letter at a time.
+Let's see if we can do this in a for loop.
+We know that we will be repeating this process precisely length times, so a
+for loop as opposed to a while loop seems to be the better tool here.
+We can type for i in range length, which creates a range object that
+consists of length number of members.
+Let's see what we can do next.
+Right now, we're looping over our range object,
+and we're picking characters one at a time uniformly at random.
+This is a good starting point, but so far we're
+not storing our randomly chosen characters anywhere.
+Remember that if we have two strings, say a and b,
+we can concatenate these two strings by putting in a plus sign in between them.
+This suggests that I could take my existing password,
+pw, and define my new password as the current password
+with one extra character added to the end.
+So let's see what's happening here.
+We've created an empty password.
+We've established a set of characters that we want
+to use as the basis for our password.
+We're then looping over a line of code exactly length number of times.
+Each time we're choosing one character uniformly
+at random from our list called characters.
+In addition to picking that character, we
+append or concatenate the newly chosen character to our existing password.
+Once the for loop concludes, we have our password.
+The only thing that we still have to do is return that password
+to the caller of the function.
+We do that by typing return password.
+Let's now try running this function in the interactive mode.
+I can call this function by typing password,
+and perhaps initially I would like to have a password of length 4.
+In this case, Python returns a password "cfac".
+I can try this again and I seem to be getting a new password.
+If I ask for a longer password, perhaps one with 10 characters,
+the code appears to be working correctly.
+However, if we go back to our set of characters,
+we only sample the letters from the string abcdef.
+Let's now add a few more characters to our character set.
+We've now redefined our character set.
+The next thing I want to do is I need to rerun this function.
+Remember, if I don't rerun the function, Python
+will not implement any of the changes that I have typed in the editor.
+We can now try calling the password function again.
+Let's start with a short password, maybe with just 5 characters.
+And you can see that Python is now randomly choosing characters
+from the entire set of alphabets.
+What if you also wanted to include numbers in our set of characters?
+We could do that by typing the numbers 0, 1, 2, and so on right
+after our z letter in the string.
+We can also concatenate a new string to the end of the existing one, where
+we type out the numbers one at a time.
+We can now try rerunning the function -- let's try calling it.
+In this case, Python is including both characters and letters in our password.
+If you want to be really secure, we could generate a much longer password,
+say one with 50 characters.
+This is how you generate random passwords using Python functions.
+
+1.3.9: Common Mistakes and Errors
+Let's then look at some common mistakes in Python.
+One of the most common mistakes is not reading or understanding
+error messages.
+Consider a situation where I have a list L. Lists are
+indexed by object positions.
+So if I type L square brackets 5, in this case,
+Python gives me an error message saying "list index out of range".
+What does this error mean?
+Well, I can ask Python to tell me how long is my list L. In this case,
+the list contains three objects.
+That means their locations are 0, 1, and 2.
+So even if I try to access object at location 3, I will get the same error.
+Whenever you're accessing objects in a sequence,
+make sure you know how long that sequence is.
+Another common error is forgetting that dictionaries
+have no left-right ordering.
+Remember in a dictionary, a given key object
+is always coupled with its value object, but the key value
+pairs themselves can appear in any order inside the dictionary.
+Another common error is trying to do an operation that
+is not supported by the object.
+Here we have a list that consists of the numbers 2, 4, and 6.
+Imagine if I type L add 8.
+Python gives me an error.
+In this case, the error is what's called an Attribute Error.
+Python is telling me the list object has no attribute "add."
+In other words, a list object doesn't have a method called "add".
+The right method is "append."
+So instead of typing L.add, what I really should
+type is L.append and then provide my new number at the end.
+So the lesson here is, make sure you know
+the type of the object you are working with,
+and you know what are the methods that the object supports.
+Another common error is trying to access an object in the wrong way.
+In this case, I have built a dictionary.
+Let's look at what are the keys of my dictionary.
+They appear to be numbers 1, 2, 3
+and the values in the dictionary are letters aa, bb, and cc.
+I might be tempted to do a dictionary look up
+like this-- D followed by square brackets
+and I might just put in number 1.
+Python is giving me a very short error message "KeyError: 1".
+How should I interpret this message?
+If you look at the keys closely, you realize that the keys are actually not
+numbers, but they are strings.
+So what I really should be providing here is a string, not a number.
+Therefore, whenever accessing dictionaries, make sure
+you know the type of your key objects.
+Another common error is trying to modify immutable objects.
+Remember immutable objects cannot be modified after they have been created.
+In this case, we have a string called "Python."
+What I cannot do is try to modify the content of the zeroth element.
+In this case, Python is telling me, string object
+does not support item assignment.
+The fundamental problem here is strings are immutable objects.
+Therefore their content cannot be modified.
+Another common error is trying to operate on two objects that
+are actually of different type.
+A very common instance of this error is the following:
+I'd like to concatenate a string and a number.
+My string is "the answer is"
+and I'd like to simply concatenate that with number 8.
+In this case, we're getting a type error
+because we're trying to concatenate a string and a number.
+The fix is to turn the number to a string
+and now concatenation works.
+Therefore, make sure that you always know the type of your objects.
+And is a very common error in Python has to do with indentation.
+And this error happens especially frequently in the context of functions.
+I've written a simple function here with the goal
+of calculating the running sum up to n.
+Here is how the function is intended to work.
+I first set up my result variable which is my running sum, which
+is initially equalled to zero.
+I then set up a range object, and I use k
+to loop over all of the numbers in my range object.
+What I want to do is I always want to take my running sum
+and add the value of k to that sum.
+Once I'm done, I want to return the result to the caller.
+Let's try defining this function.
+And then we can try running this function.
+I'd like to calculate the running sum for the first 12 integers.
+In this case, the answer is 0.
+So what went wrong here?
+Let's look at the code again.
+On line 2, we define our sum to be equal to zero.
+On line 3, we started looping over the range object.
+The first number in the range object is going to be 0,
+so initially we just simply add 0 to our rsum.
+At this point, rsum is going to be 0.
+The problem happens on line 5.
+Instead of completing the for loop, we actually
+return rsum some during the first iteration.
+This is why the return number is always going to be zero.
+The way to fix the problem is the following.
+It all comes down to indentation on line 5.
+We need to move the return statement one level up.
+Let's now try rerunning the function.
+Let's now try invoking the function
+and the function works this time.

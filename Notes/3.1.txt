@@ -1,0 +1,541 @@
+3.1.1 Introduction to DNA Translation
+Life depends on the ability of cells to store, retrieve, and translate
+genetic instructions.
+These instructions are needed to make and maintain living organisms.
+For a long time, it was not clear what molecules
+were able to copy and transmit genetic information.
+We now know that this information is carried by the dioxyribonucleic acid
+or DNA in all living things.
+DNA is a discrete code physically present
+in almost every cell of an organism.
+We can think of DNA as a one dimensional string of characters
+with four characters to choose from.
+These characters are A, C, G, and T. They
+stand for the first letters with the four nucleotides used to construct DNA.
+The full names of these nucleotides are adenine, cytosine, guanine,
+and thymine.
+Each unique three character sequence of nucleotides,
+sometimes called a nucleotide triplet, corresponds to one amino acid.
+The sequence of amino acids is unique for each type of protein
+and all proteins are built from the same set of just 20 amino acids
+for all living things.
+Protein molecules dominate the behavior of the cell
+serving as structural supports, chemical catalysts, molecular motors, and so on.
+The so called central dogma of molecular biology
+describes the flow of genetic information in a biological system.
+Instructions in the DNA are first transcribed into RNA
+and the RNA is then translated into proteins.
+We can think of DNA, when read as sequences of three letters,
+as a dictionary of life.
+In this case study, we will first download a DNA strand as a text file
+from a public web-based repository of DNA sequences.
+We will then write code to translate the DNA sequence
+to a sequence of amino acids where each amino acid is
+represented by a unique letter.
+We will also download the amino acid sequence to check our solution.
+In the process, we will also brush up on basic Python skills.
+To make the problem a bit more concrete, let's first
+think about it conceptually.
+The input to our program is going to be a DNA sequence that
+consists of a four letter alphabet.
+We then read this sequence three letters at a time,
+translate each triplet to a single letter
+that stands for a specific amino acid, and then proceed
+to the next set of three letters.
+We do this until we have reached the end of the input sequence.
+Here is part of the table that we'll be using to do the translation.
+The actual table is longer than this.
+The input is shown on the left and the outward as shown on the right.
+In general before you start writing any code,
+make sure you really understand the problem.
+Sometimes it's helpful to run through a simple example on a piece of paper
+before even thinking about the code itself.
+Let's consider the following input sequence.
+How would you translate this sequence?
+So first we identified the first triplet, which in this case is ATA.
+That corresponds to an I. We then move on to the next triplet,
+CAA, which corresponds to a Q and so on.
+The third triplet, DGG, corresponds to W,
+and the final triplet, CAA, corresponds to a Q again.
+So a translation of this DNA sequence would be IQWQ.
+Just to be clear, the top line in this example
+corresponds to our DNA sequence and the bottom line corresponds
+to our sequence of amino acids.
+Instead of doing this manually, we want to write a Python program that does
+the translation for us automatically.
+In this case study, we have four tasks.
+The first task is to manually download DNA and protein sequence
+data to your computer.
+The second task is to import the DNA data into Python.
+The third task is to create an algorithm that
+translates to DNA using the translation table we will provide.
+The fourth task, the final task, is to check if your DNA translation matches
+the protein string you have downloaded.
+
+3.1.2 Downloading DNA Data
+Our first task is to manually download the data we need in this case study.
+The NCBI is the National Center for Biotechnology Information,
+and it is United States' main public repository of DNA and related
+information.
+We will download two files from the NCBI.
+The first is a strand of DNA and the second
+is the corresponding protein sequence of amino acids translated from this DNA.
+First, we want to enter the website of the NCBI.
+You can either go there directly or you can Google N-C-B-I. In this case,
+it's the first hit that comes up.
+Now you'll see at the top, where it says All Databases.
+We're interested in downloading a Nucleotide sequence
+so we scroll down until we get Nucleotide.
+And in this field we need to enter a specific code that corresponds
+to the sample that we want to download.
+Here you need to be careful to type in exactly the following:
+capital N, capital M, underscore 207618.2.
+Once you have entered this exact string you can hit Search.
+If you did your search correctly you should see the same page
+that we have here up on the computer.
+This page contains a lot of information about this specific sample.
+We are primarily interested, first, in the DNA sequence.
+The DNA sequence is shown at the bottom of the page
+but the best way to download these data is the following:
+You can go to the very top of the page, you can click FASTA,
+and then you have the sequence here on the screen.
+You can then use your mouse and your cursor to highlight the sequence.
+Make sure you include the very first letter, which is G,
+and the very last letter, which is T. We can copy that,
+and then we go to our Spyder editor.
+I like to create a new file here so I just click New File.
+I then delete whatever happens to be on the screen.
+And the next step is to paste the DNA sequence into the editor.
+The next step for us is to save this DNA sequence.
+I have previously created a directory that I have called python_case_studies.
+I first go there.
+This case study is a translation case study
+so I will be selecting that folder.
+I want to call this file dna.txt, and I recommend
+you use that same file name convention.
+I then have to choose a dot txt in the menu
+here because we're saving a text file not a Python file.
+And if all goes well, you should now have dna.txt
+in your python_case_studies directory.
+Let's then go back from our sequence page, the main page for this sample.
+And to download the amino acid sequence you can click CDS.
+CDS stands for the coding sequence.
+If you look at the bottom right corner of your screen,
+you will see the translation here at the bottom of the pop-up window.
+I'm going to select that.
+Then I'll go back to my Python editor.
+I'll open a New File.
+I'll remove whatever is in this file, and then I will paste the amino acid
+sequence into the editor.
+I will then go to Save.
+I will then pick my previously created python_case_studies directory.
+I go to translation.
+And I'm going to call this file protein.txt.
+Again, it's a text file so I need to make
+sure I choose text file in the menu.
+And now we have downloaded both the DNA sequence and the protein sequence file.
+
+3.1.3: Importing DNA Data Into Python
+The best way to read a file depends on what you'd like to do with the file.
+If you need to read a large file, but you're only
+interested in some of the lines, not all of them,
+you could read the file in a for loop, one line at a time, process the line,
+or skip it, and move onto the next line.
+We've seen an example of this earlier in the course.
+This approach leads to memory efficient and fast code.
+Another option is to read the entire file in one go.
+In this case, we will be doing that because we do not need
+to skip over any lines in the file.
+Before you start working with files, make sure
+that your Python working directory corresponds to the directory
+where you downloaded your files.
+You can type pwd, which stands for print working directory, in your IPython
+shell.
+And, in this case, I do need to move to a different directory.
+CD stands for change directory.
+I'm going to go to Python case studies.
+Then I'll issue cd again.
+I want to go to the translation case study.
+I can now say pwd again, and my working directory has now been changed.
+Now, let's read the file.
+Let me first specify the name of the input file.
+I'm going to call that variable input file.
+And, in this case, it's dna.txt.
+I'll then be using the open function to open the input file.
+The second argument is r which is short for reading.
+I want to capture the file object here.
+I'm going to call that f.
+And, finally, I can use the f.read method to read the entire file.
+I want to make sure that I capture the contents of that file.
+In this case, what I am reading is a sequence,
+so I'm going to call that variable seq.
+So seq = f.read.
+I want to move this code here in my editor for later use.
+And now we can look at the sequence.
+You can either say print seq or you can just type seq.
+So it looks like the reading operation was successful.
+If you look carefully, you can see some additional characters in the text.
+It looks like backslash n appears in the text with some frequency.
+This is a special character that affects the way the string gets printed,
+and we ended up with these extra characters
+because we copy pasted the text from a web browser to the editor.
+You can see how these characters affect the way the string is printed
+by asking Python to print the data.
+So we type print seq,
+and you see that the data appear differently on the screen.
+These extra characters will cause problems for translation
+so how could we remove them?
+An easy way is to use the replace method which takes two arguments--
+it replaces every occurrence of the first argument substring
+with the second argument, another substring.
+We can type seq.replace.
+The first is going to be "\n",
+that's what gets replaced,
+and we will replace that with nothing.
+Because strings are immutable, the method returns a new string.
+So in order for us to use the new string,
+we need to assign it to a variable.
+In this case, I'm going to reassign it to the same variable as before.
+We'll take the same comment we had before.
+I'll just type seq = seq.replace.
+Let's try printing seq.
+And, in this case, we do not have those extra line breaks
+that we had there before.
+Let me take this line of code and move it up to the editor for future use.
+Sometimes there may be another character hiding in a string,
+and depending on your computer, it may or may not be visible.
+Just to be on the safe side, let's remove that as well.
+There is no harm in running this extra step
+because if you don't have the extra character nothing happens.
+We'll be using the same command as before.
+But, in this case, we will be removing the backslash r character
+and we'll replace that with nothing.
+I will again take and copy paste this line here,
+and we are ready to move on.
+
+3.1.4: Translating the DNA Sequence
+The translation process is essentially a table lookup operation.
+Python provides a very natural object for dealing
+with these types of situations.
+This object is a dictionary.
+In this case, the key objects are strings,
+each consisting of three letters drawn from the four letter alphabet.
+The value object is also a string but a string
+consisting of just one character.
+Defining a dictionary can be somewhat tedious.
+In this case, we've already done this work for you.
+We've created a dictionary called table where
+the keys are strings corresponding to codons or nucleotide triples.
+And their values are also strings which correspond to common one-letter symbols
+used for the different amino acids.
+Let's then open the file table.py.
+It's in my python_case_studies translation dictionary.
+I'm going to open that.
+And I'll just mark the table, making sure to get the full table.
+I will then go back to my editor here, and I'll
+copy paste the dictionary in here.
+You'll see that the table dictionary appears indented.
+This is going to cause problems.
+So I want to make sure I will de-indent the dictionary.
+And now we're good to continue.
+Let's first make sure we know how to use this translation table.
+How would you look up the key that corresponds to CAA or CCT or GTA?
+I'm going to first just type table.
+And I might initially type CAA.
+But this is a problem because the keys themselves are strings.
+That's why I need to provide a string as an input.
+And now I get the desired output.
+To look up CCT I can just change to string CCT,
+and the output is P. Let's then think about how to approach this problem.
+Here are the steps that I would take.
+First, I would check that the length of the sequence is
+actually divisible by three.
+It should be, but sometimes things go wrong so it's important to check this.
+Next, I would look up each three-letter string in our table
+and store the result somewhere.
+Finally, you keep doing this in a loop until you
+get to the end of the sequence.
+Let's write some informal pseudocode step-by-step instructions
+on how to proceed.
+Let me first create some space here in my editor.
+The first task I would like to do is to check the length of the sequence.
+So, you might say something like check that the sequence
+length is divisible by three.
+If that's true I can then loop over the sequence.
+For each iteration of the loop I will need to extract a single codon.
+And finally, I need to look up the codon and store the result. Look up the codon
+and store the result.
+This is certainly not a formal pseudocode
+but these step-by-step instructions will hopefully help us
+as we start writing the actual code.
+Here we're going to check the length of the sequence.
+For a number to be divisible by three it must be that division by three
+yields a remainder of zero.
+Python, like many other languages, has a so-called modulo operator that
+yields to remainder from a division.
+If you haven't come across the modulo operator
+this would be a good time to go online and search for it.
+Let's look at a couple of examples of the modulo operator.
+7 divided by 3 yields 2.33.
+Let's do 6 divided by 3.
+That gives 2.0.
+In the first example, we would expect to have remainder, but in the second
+we would not.
+So we go back to the example 7 divided by 3
+and we replace division with modulo.
+The result is 1.
+3 divides 7 twice and 1 is left over.
+Let's look at the second example, 6 divided by 3.
+If we do 6 modulo 3, in this case, 3 divides 6 exactly twice
+and nothing is left over.
+Let's look at the length of the sequence.
+And we can then ask if this is divisible by three?
+In this case, the answer is no.
+And this is something that we'll come back to later.
+Lets start writing the code here.
+So we are now dealing with the first step in our pseudocode.
+We'd like to ask if the length of sequence modulo 3 is equal to 0.
+If that's the case, then we do have a valid sequence
+and we can proceed with the code.
+If you try running this, we can remove the first comment here,
+if you try running this you'll see that it will not run.
+That's because if it is a compound statement
+and Python expects something to be on the following line.
+We can use the pass statement here if we'd like to run the code.
+It doesn't do anything, which may sound odd,
+but it's helpful when Python syntax requires
+some statement, as is the case here.
+We can now try rerunning this, and the code runs.
+Let's then think about the loop.
+To loop over the sequence one character at a time
+we could use the following structure.
+We can type for s in seq.
+And then we might just print s.
+We could build our codons one character at a time but in this case,
+string slicing is probably a better alternative.
+Let's take our sequence and let's slice it.
+The starting point of the slice is 0 and the end point is 3.
+Remember, in this case, when you're slicing
+a string the elements that will be located
+are those at positions zero, one, and two.
+In other words, Python stops before it hits the stop index.
+If I'd like to look at the next element, I want to start at 3 and end at 6.
+To look at the third element of the sequence I would start at 6
+and end at 9, and so on.
+So to start a slice I need to sequence 0, 3, 6,
+and so on for the starting locations.
+The endpoint is always going to be the starting point plus three.
+This seems to call for a range object.
+For a range object we specify the starting point first, say
+0, the end point, let's say 11, and the step size.
+In this case, we've defined a range object.
+But if we want to print out the values we need to first turn that into a list.
+So I'm constructing a range object but to see the actual values in the range
+object I will turn that into a list.
+We can now continue with our code.
+I then want to take my range object and move it to my code here.
+This replaces the pass statement.
+This is going to be a for loop.
+So we'll say for i in range starting from zero we
+want to go to the end of the sequence.
+So the length of the sequence goes in here.
+And we go in steps of three.
+This is the looping over the sequence part.
+So this line is now done.
+The next step is going to be extracting a single codon.
+I'm going to call that codon because that makes sense.
+I'll take my sequence, and the first starting point is going to be i.
+And I will slice from i to i plus 3.
+Again, this enables me to extract the codon.
+I can try running this code.
+And we see that the code runs.
+The next step is to look up the codon and store it.
+We can store the protein in a string and concatenate amino acids to it
+one at a time.
+Let's go back to our code.
+I will first initially need to create my protein.
+I'm just going to call the protein.
+And it's going to be an empty string.
+Once I've extracted my codon I need to look it up.
+Remember, my table is called table, that's my translation table.
+I can look up my codon by typing table codon.
+And this is my new amino acid that has to be appended to the end of protein.
+Protein is a string so we can concatenate the existing protein
+string to the new string, which is created
+by the table codon expression here using the shorthand notation plus equals.
+So in this case, we're looking up each codon one at a time
+and we are concatenating that to the existing protein string.
+I've now completed the last line.
+So I'm going to erase that and I'm going to try running my code.
+The code runs so at least we know that we don't have any syntax errors so far.
+It's helpful to turn our code into a function
+so that we can easily call it using different sequences.
+First I need to start with the def statement.
+I'm going to call this function translate
+because it translates the input sequence, a DNA sequence,
+into a sequence of amino acids.
+We need a colon on at the end of the function definition.
+We then need to indent the code that I have here.
+Finally, we need a return statement that returns the protein
+to whoever called this function.
+And our function should be ready at this point.
+Let's then try running the definition of the function.
+And in this case, we are not getting any error messages,
+which is what we wanted.
+We can also try actually running the function.
+We've now defined it but we haven't actually run it yet on any input data.
+Let's look at a couple of simple examples.
+I'd like to translate say, ATA, and the result should be I, which is correct.
+Let me try one more example.
+I might want to translate triple A, and the answer should be K.
+So, so far we're in good shape.
+While we're at it, let's add a docstring to our function.
+A docstring is a string literal that occurs
+as the first statement in a module function,
+or a class, or a method definition, and it becomes part of that object.
+You or somebody else can then use the help function
+to learn more about the function using the docstring.
+The docstring should summarize the behavior of the function
+and document its arguments, returned values, possible side effects,
+and anything else that would be important for a user
+to know about the function.
+While the function is still fresh in our minds,
+let's try writing a short docstring.
+Here's an example of a docstring that I wrote earlier.
+Make sure to include your docstring inside the function definition.
+We can now rerun the definition of the function which contains the docstring.
+We have just redefined it.
+If I now type help translate you'll see that the docstring
+has become part of the function.
+
+3.1.5: Comparing Your Translation
+Our final task in the short case study is
+to compare your translation to the official one obtained from the NCBI
+website.
+Let's look at how we read in the DNA sequence file before.
+In our code, we defined first the name of the input file as dna.txt.
+We then opened that file, and then we have read in the entire file in one go.
+There is another way to read in an entire file, which is usually
+preferred to our previous approach.
+This new way involves a with statement, and the reason it's preferred
+is because it's better able to cope with situations
+where something goes wrong with the reading of the file.
+You can read more about it online.
+Here, I will just demonstrate how it works.
+Let's take our existing code.
+We'll just copy and paste it here above.
+The first line doesn't change.
+Our input file is still dna.txt.
+With the with statement, the word with becomes the first statement
+on the line.
+The second one is open, which actually opens our file.
+At the end of the line, we add as f.
+In this case, we are using the with statement
+to open a file we are still calling our file object, f.
+We now need to indent the third line, seq equals f.read.
+This is because with is a compound statement, so it ends with a colon,
+and that's why the following line has to be indented.
+Let's turn our sequence reading code into a function that reads in the file
+and automatically replaces backslash n and backslash r
+characters with an empty space.
+We're going to be defining a function called read sequence, read_seq.
+First, we have def.
+The input argument is going to be inputfile, and we need our colon here.
+The first two lines will be just reading in the file,
+but I need to make sure to indent these two lines.
+The next step will be to do the replacements of backslash n
+and backslash r with empty space.
+Again, we need to indent these.
+And finally, we need to return the sequence
+to whoever called our function.
+So we'll say return sequence.
+While the function is still fresh in our minds,
+let's make sure to add a short docstring.
+In this case, the function reads and returns
+the input sequence with special characters removed.
+Now that we have defined the function, let's
+first run the definition of the function.
+And we can now try using it.
+I would first like to read in the protein sequence,
+so we'll say prt equals read_seq.
+The input is a string, protein.txt.
+And the function runs.
+We can also read in the DNA sequence by saying DNA
+equals-- the sequence is called DNA.
+And now we've read also our DNA sequence.
+We can try translating the DNA sequence, but in this case,
+the output is an empty string .
+This suggests that there might be a problem with the length of our DNA
+sequence.
+If you look at the length of our DNA sequence,
+we can ask if that is divisible by 3.
+In this case, we have a remainder of 2, so we know that it's not.
+To understand what's going on, let's go back to the NCBI website.
+If you look at the website where it says CDS,
+you will see two numbers next to it, 21 and 938.
+These are the locations of the gene where
+the coding sequence starts and ends.
+So instead of taking the entire DNA sequence,
+we would really like to be doing the translation starting at position 21
+and ending at 938.
+We can use string slicing to obtain the part of the sequence that we want.
+However, we need to be careful with the indices.
+If you investigate the NCBI website, you will
+see that the sequence positions are numbered from 1 to 1157.
+In Python, indexing starts at 0, so genome positions 21 and 938
+correspond to Python string positions 20 and 937.
+So the starting point of the string slice will be 20,
+but the stopping location of the string is 938.
+This is because when we specify the stopping location as 938,
+the last character to be included is at position 937, which
+is exactly what we want.
+Let's try rerunning our translate function.
+We take the DNA sequence-- not all of it.
+In this case, we start at 20 and we want to end at 938.
+In this case, we're at least getting a translation.
+We can then print out our protein sequence, which is prt.
+If you compare these two sequences, you will
+see that they look almost identical.
+The only difference between these two sequences
+is the underscore character that appears at the end of our translated sequence.
+So here's what's going on.
+At the very end of a protein coding sequence,
+nature places what's called a stop codon.
+There are three stop codons, and their function
+is to tell someone reading the sequence that this
+is where you should stop reading.
+It's almost like an end of paragraph sign.
+The stop codon is not included in the downloaded protein,
+because it's usually not of interest.
+But when we download the DNA sequence and translate it ourselves,
+the stop codon is included in the translation.
+Therefore, we should really skip the last codon from our translation,
+and we can modify the stopping point of the slice.
+So let's try rerunning our protein translation,
+but instead of ending the slice at 938, we'll end it at 935.
+In this case, the protein looks identical to our downloaded protein.
+To check if it is, we can ask Python if prt, the downloaded protein,
+is equal to the translated protein.
+When we run this line on the screen, Python
+returns true, which means success.
+An alternative approach is the following:
+The function translate returns a string of amino acids.
+So instead of omitting the last three characters from the DNA sequence,
+I can just omit the very last character of the translated amino acid sequence.
+Let's try running that.
+In this case, we want to translate the protein all the way to location 938,
+but we want to exclude the last character of the translation.
+That's why we slice the output from the very beginning,
+and we only exclude the last character.
+Again, our translated protein and the protein sequence we have downloaded
+are identical.
+We have accomplished four tasks in this case study.
+First, we have manually downloaded the DNA and protein sequence data
+from the website.
+Second, we imported the DNA data into Python.
+We then created an algorithm that translated the DNA using a dictionary.
+Finally, we checked that the DNA translation
+matched the downloaded amino acid sequence, the protein
+string, which it did.
+I hope you both enjoyed this case study and learned a lot of Python.
+

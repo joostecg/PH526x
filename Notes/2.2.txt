@@ -1,0 +1,347 @@
+2.2.1: Introduction to NumPy Arrays
+
+NumPy is a Python module designed for scientific computation.
+NumPy has several very useful features.
+Here are some examples.
+NumPy arrays are n-dimensional array objects
+and they are a core component of scientific and numerical computation
+in Python.
+NumPy also provides tools for integrating your code with existing C,
+C++, and Fortran code.
+NumPy also provides many useful tools to help
+you perform linear algebra, generate random numbers, and much, much more.
+You can learn more about NumPy from the website numpy.org.
+NumPy arrays are an additional data type provided by NumPy,
+and they are used for representing vectors and matrices.
+Unlike dynamically growing Python lists, NumPy arrays
+have a size that is fixed when they are constructed.
+Elements of NumPy arrays are also all of the same data
+type leading to more efficient and simpler code
+than using Python's standard data types.
+By default, the elements are floating point numbers.
+Let's start by constructing an empty vector and an empty matrix.
+By the way, don't worry if you're not that familiar with matrices.
+You can just think of them as two-dimensional tables.
+We will always use the following way to import NumPy
+into Python-- import numpy as np.
+This is the import we will always use.
+We're first going to define our first zero vector
+using the numpy np.zeros function.
+In this case, if we would like to have five elements in the vector,
+we can just type np.zeros and place the number 5 inside the parentheses.
+We can define a two-dimensional array-- let's
+called that zero_matrix-- in the following way:
+We, again, provide only one argument to NumPy.
+In this case, it has to be a tuple.
+A tuple specifies two things.
+The first argument is the number of rows in the table
+and the second argument is the number of columns in our table.
+So if you would like to create a five by three table,
+we type np.zeros, two parentheses, 5 comma 3, and two closing parentheses.
+Both the zero_vector and the zero_matrix will contain only zeroes
+as their elements.
+We can see it as we type zero_vector, and similarly if we type zero_matrix.
+You can also construct arrays of ones using the np.ones function,
+and its index is identical to the syntax of the zero's function.
+To create an empty array, you can use the np.empty function, which
+allocates the requested space for the array, but does not initialize it,
+meaning that the content could be anything, whatever
+happens to be in the computer's memory at the location where
+the array is set up.
+If you are dealing with a very large array
+and you know for sure that you will be updating each element of the array,
+this could save you some computation time
+because Python doesn't need to initialize the array.
+However, you should use this function with care
+and if you're new to NumPy, it's probably best to avoid it at first.
+We can also construct NumPy arrays using specified values, in which case,
+we use the np.array function, and the input argument to the function
+is a sequence of numbers, typically a list of numbers.
+In what follows, we assume that lower case variables
+are vectors or one-dimensional arrays and upper case variables are
+matrices, or two-dimensional arrays.
+To practice creating NumPy arrays, let's create
+two, short, one-dimensional arrays.
+Our first array is going to be called x, and it
+consists of the numbers 1, 2, and 3.
+Our second NumPy array is going to be called y,
+and that's going to consist of the numbers 2, 4, and 6.
+When you construct a two-dimensional NumPy array,
+you specify the elements of each row as a list
+and you can then define the entire table as a list that contains at its elements
+each of the lists of the row elements you've defined.
+Let's work through a simple example.
+Let's define the first row as consisting of numbers 1 and 3.
+Then we can define the second row as consisting of the numbers 5 and 9.
+So here we have two lists that are separated by a comma.
+And we will embed these two lists inside yet another list,
+and now we have our nested list object.
+To turn this into a NumPy array, we type np.array and the nested list object
+goes inside the parentheses.
+Finally, sometimes you want to turn the table sideways.
+This is called taking the transpose of a matrix, which
+means that the first row becomes the first column,
+the second row becomes the second column, and so on.
+Notice that another identical way to state this
+is to say that the first column becomes the first row.
+The second column becomes the second row, and so on.
+We can transpose a two-dimensional array using the transpose method.
+If we go back to the array that we had here-- let's call this A.
+We can use now the transpose method to flip the array around.
+
+2.2.2: Slicing NumPy Arrays
+It's easy to index and slice NumPy arrays regardless of their dimension,
+meaning whether they are vectors or matrices.
+With one-dimension arrays, we can index a given element
+by its position, keeping in mind that indices start at 0.
+With two-dimensional arrays, the first index
+specifies the row of the array and the second index
+specifies the column of the array.
+This is exactly the way we would index elements of a matrix in linear algebra.
+We can also slice NumPy arrays.
+Remember the indexing logic.
+Start index is included but stop index is not,
+meaning that Python stops before it hits the stop index.
+NumPy arrays can have more dimensions than one of two.
+For example, you could have three or four dimensional arrays.
+With multi-dimensional arrays, you can use the colon character
+in place of a fixed value for an index, which
+means that the array elements corresponding
+to all values of that particular index will be returned.
+For a two-dimensional array, using just one index
+returns the given row which is consistent with the construction of 2D
+arrays as lists of lists, where the inner lists correspond
+to the rows of the array.
+Let's then do some practice.
+I'm first going to define two one-dimensional arrays,
+called lower case x and lower case y.
+And I'm also going to define two two-dimensional arrays,
+and I'm going to denote them with capital X
+and capital Y. Let's first see how we would
+access a single element of the array.
+So just typing x square bracket 2 gives me the element located at position
+2 of x.
+I can also do slicing.
+So I can specify the start index and the end index, in which case
+I get two elements here from the x array, the numbers 1 and 2.
+If you look at the sizes of x and y, each of them
+has exactly three elements.
+That means that we can add those two arrays up.
+So I can type x plus y, which gives me a new array called z.
+In this case, the elements of z will be element-wise additions
+from the vectors x and y.
+So the first element of x is added to the first element of y, and so on.
+Now moving on to two-dimensional arrays,
+we can also investigate individual rows or columns of arrays.
+Typing X square bracket colon comma 1 gives me
+access to the first column of the table X. I can do the same for Y,
+and now I have to first column of the two-dimensional array, Y.
+I can also add these two up.
+So I can type X plus Y, again colon comma 1.
+In this case, I have added together the first columns of these two arrays.
+To extract the first row of X, I type, within square brackets,
+1 comma colon which gives me all of the elements in the first row.
+In this case, these are numbers 4, 5, and 6.
+I can take also the first row of Y, and I can then add these two arrays up.
+Because two-dimensional arrays are defined as nested rows,
+I can use a shorthand notation to access the first row of X, which in this case
+would be just X square brackets 1, and this gives me the same exact output
+as typing X square bracket 1 comma colon.
+One word of caution --
+what happens if we take two lists and put a plus sign between them?
+Well, we can give it a try.
+I can define a list which consists of elements 2 and 4.
+I have a plus sign followed by another list with elements 6 and 8.
+Remember, putting a plus sign between two lists
+concatenates those two lists, resulting in a new list which is longer than
+the two lists that were added together.
+Now let's look at a different example.
+What happens if we first turn those lists into NumPy arrays,
+and then have a plus sign between them?
+I'm going to take my previous line here.
+I'll just turn this into a NumPy array.
+So my first NumPy array has two elements, 2 and 4.
+I'm going to add that to another NumPy array, which has elements 6 and 8.
+In this case, what's happening is we have two one-dimensional arrays.
+And what we've accomplished here is an element-wise addition
+between these two arrays.
+
+2.2.3: Indexing NumPy Arrays
+NumPy arrays can also be indexed with other arrays
+or other sequence-like objects like lists.
+Let's take a look at a few examples.
+I'm first going to define my array z1.
+And let's put in a few elements in there-- 1, 3, 5, 7, and 9, for example.
+I can then define a new array called z2, which is just z1 with one
+added to every single element of the array.
+We can now look at these two arrays to see what their contents are.
+I can now define a list called n, which I will be using to index my z1 and z2.
+So let me put in the elements 0, 2 and 3 in my index.
+I can now type z1, square bracket, ind, which gives me access
+to the elements that are located within z1 at the locations that
+are specified by ind.
+In this example, index or ind, was defined as a Python list,
+but we could also have defined that as a NumPy array.
+So I can take my previous list, 0, 2, 3, turn that into a NumPy array,
+and I can still do my indexing.
+In other words, we can index NumPy arrays
+using either lists or other NumPy arrays.
+NumPy arrays can also be indexed using logical indices,
+but what does that actually mean?
+Just as we can have an array of numbers, we
+can have an array consisting of true and false, which are two Boolean elements.
+Let's first construct a Boolean array.
+I'm going to define my z1 again here as before.
+I can now type something like z1 greater than 6.
+The element 0 of z1 is not greater than 6,
+and therefore element 0 of the Boolean array that Python returns to you
+is false.
+The same is true for elements 1 and 2 of z1, so we get a false there as well.
+Now element 3 of Z1 is greater than 6.
+Its value happens to be 7, so therefore, the corresponding element
+in the Boolean array is true.
+And in fact, all subsequent elements are also greater than 6,
+so therefore all subsequent elements in the Boolean array are also true.
+We can use the Boolean array, also called a logical array, to index
+another vector.
+But what are the elements that are returned in that case?
+As you may have guessed, Python returns those elements
+of the array for which the corresponding value in the Boolean vector is true.
+Let's look at an example.
+Let's first use the logical index vector to access elements of z1.
+I'm interested in accessing elements of z1, I therefore start with z1.
+I need my square brackets as usual.
+Inside the square brackets, I need to put in my logical index vector, which
+is, in this case, z1 greater than 6.
+In this case, Python returns to me those elements
+of the z1 array that happened to be greater than 6 in value.
+But I can also do the same to my array z2.
+Now let's think about this, what's happening here.
+My index vector is still identifying those elements of z1
+that happened to be greater than six.
+Now in this case, I am however, using that index vector
+to access elements in my array z2.
+I can run this and I get an output.
+I could also define my logical vector in a slightly different way.
+I could explicitly construct a logical vector.
+In this case, I've typed ind equals z1 greater than 6.
+If we inspect the content of ind, we'll see that it's a logical vector.
+I can now type z1, square bracket, ind, and I get the same output as before.
+Similarly, I can type z2, ind, and the output is the same.
+One final word about indexing NumPy arrays-- and this
+is really important because it can easily
+lead to subtle programming errors.
+When you slice an array using the colon operator, you get a view of the object.
+This means that if you modify it, the original array will also be modified.
+This is in contrast with what happens when you index an array, in which case
+what is returned to you is a copy of the original data.
+Let's clarify this distinction with examples.
+I'm going to define my z2 as before.
+Then, I will define a new vector "w" in this case.
+I'm just going to slice that, let's say, from 0 to 3.
+I can look at the contents of my w.
+In this case, I choose to modify the element at location zero.
+So I'm just going to type w  square brackets 0, is equal to 3.
+I can now inspect the content of w, and instead of having 1, 3, and 5,
+I have 3, 3, and 5, as we would have expected.
+However, if I now type z1, you will see that the first element at location
+is 0 of that array has also been modified.
+Let's see what happens if we use indexing and not
+slicing to access an array.
+As before, I'm going to define my z1 vector.
+Then I need to define my index vector, which I'm going to call 0, 1, and 2.
+In this case, I've defined this as a list,
+but if I wanted to define that as an array,
+I simply place NumPy.array outside of my list.
+Now I have two elements defined.
+I have my z1 and I have my index.
+I can now do the following-- I'm going to create w
+by taking my object z1 and indexing that using my index vector.
+The contents of w here are 1, 3, and 5.
+I can now look at the element 0 of w and I can set that to be equal to 3.
+If I now look at w, I I'll see that the element, the first element,
+located at position 0 has been modified to 3.
+If I now go back to my array z1, I see that the first element, number 1,
+has not been modified.
+In summary, for all cases of indexed arrays, what is returned
+is a copy of the original data, not a view as one gets for slices.
+
+2.2.4: Building and Examining NumPy Arrays
+NumPy provides a couple of ways to construct arrays with fixed,
+start, and end values, such that the other elements are uniformly
+spaced between them.
+To construct an array of 10 linearly spaced elements starting with 0
+and ending with 100, we can use the NumPy linspace function.
+In this case, I'm going to type np.linspace.
+The first argument is the starting point, which is 0.
+The second is the ending point, which will be included
+in the NumPy array that gets generated.
+And the final argument is the number of points
+I would like to have in my array.
+In this case, NumPy has created a linearly spaced array starting at 0
+and ending at 100.
+Now, to construct an average of 10 logarithmically spaced elements
+between 10 and 100, we can do the following.
+In this case we use the NumPy logspace command.
+But now careful, the first argument that goes into logspace
+is going to be the log of the starting point.
+If you want the sequence to start at 10, the first argument
+has to be the log of 10 which is 1.
+The second argument is the endpoint of the array, which is 100.
+And again, we need to put in the log of that, which is 2.
+And the third argument as before, is the number of elements in our array.
+in this case, what NumPy has constructed is an array consisting of 10 elements
+where the first element is 10 and the last element is 100.
+All of the other elements are uniformly spaced between those two extreme points
+in the logarithmic space.
+To construct array of ten logarithmically spaced elements
+between numbers say 250 and 500, we first
+need to take the base 10 logarithm of the numbers, 250 and 500,
+and then feed those into the logspace function.
+So let's try that out.
+I'm going to start by typing np.logspace.
+And now we need to take the base 10 logarithm of the number 250.
+To do that, I will type np.log10 and the number is 250.
+For the second argument, I'm again going to be taking the logarithm base
+10, in this case of the number 500, and I would
+like to have 10 elements in my array.
+When I run this, the output is exactly what's expected.
+Often we need to know the shape of an array
+or the number of elements in an array.
+You can check the shape of an array using shape.
+I'm going to define the two dimensional array x,
+and to find out the shape of the array I can type x.shape.
+You can check the number of elements of an array with size.
+So in this case, I can type x.size and I find out
+that I have six elements in my array.
+Notice that you don't have parentheses following the shape
+or size in the above examples.
+This is because shape and size are data attributes, not methods of the arrays.
+Sometimes we need to examine whether any or all elements of an array
+fulfill some logical condition.
+Let's generate a small one d array and check two things.
+First, if any of the entries are greater than 0.9,
+and second, if all of the entries are greater than or equal to 0.1.
+You may remember how we generated random numbers using the random module.
+NumPy has its own random module.
+And in this case, we're going to be generating 10 random numbers drawn
+from the standard uniform distribution, meaning from the interval from 0 to 1.
+I'm going to call this vector or array "x".
+And now we can use the np.any function to find out if any of the elements of x
+are greater than 0.9.
+And the answer is this case true.
+I can then use the np.all function to find out
+if all of the elements in the array are greater than or equal to 0.1.
+In this case, the answer is true.
+To make sense of these results, we can print out the content of x.
+By looking at the second element on the second row, which
+is to 0.9216 and so on, we have an element which is greater than 0.9.
+Therefore, we have at least one of those elements,
+and therefore np.any returns true to us.
+If you look at all of the elements in our vector x, you see that all of them
+are indeed greater than 0.1.
+And that's why np.all also returns true.
+Note that the output is either true or false for the whole array.
+Either there is or is not one or more entries that are greater than 0.9.
+Also, either all entries are greater or equal to 0.1 or they are not.
+This is why the output is just a single true or false.
