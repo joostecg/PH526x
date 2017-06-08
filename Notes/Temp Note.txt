@@ -1,3 +1,5 @@
 Some new information goes here
 
 And some more
+
+And then there was some more to be added to test Git
